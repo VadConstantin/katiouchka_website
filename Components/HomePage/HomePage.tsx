@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Entry, EntrySkeletonType} from 'contentful';
+import { Entry } from 'contentful';
 
 import { IHomePage } from '@/Types';
 

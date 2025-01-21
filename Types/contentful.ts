@@ -27,7 +27,7 @@ export interface NavigationFields {
   name: string
   locale: string
   logo?: any
-  NavLinks: Array<INavLink>
+  navLinks: Array<INavLink>
 }
 
 export interface INavigation extends EntrySkeletonType<NavigationFields> {}

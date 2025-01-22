@@ -1,7 +1,7 @@
 
 import { GetServerSideProps } from 'next';
 import HomePage from '@/Components/HomePage/HomePage';
-import Navigation from '@/Components/Nav/Navigation';
+import Navigation from '@/Components/Nav/HomeNavigation';
 import { getHomePageData, getNavigationData } from '@/Services/get_contentful_data';
 import { IHomePage } from "@/Types";
 import { Entry, EntrySkeletonType} from 'contentful';
@@ -22,8 +22,7 @@ const Home = ({ locale, navMainData, homePageData }: HomeProps) => {
 
   return (
     <div>
-      <Navigation navMainData={navMainData} locale={locale} onLocaleChange={handleLocaleChange}>
-        <HomePage homePageData={homePageData} />
+      <Navigation navMainData={navMainData} locale={locale} onLocaleChange={handleLocaleChange} homePageData={homePageData}>
       </Navigation>
     </div>
   );

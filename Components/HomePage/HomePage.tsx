@@ -1,53 +1,38 @@
 "use client"
 
 import styled from 'styled-components';
+import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
-import { IHomePage } from '@/Types';
+import HomeNavigation from '../Nav/HomeNavigation'
+import BackgroundVideo from '../BackgroundVideo';
 
-interface HomePageProps {
-  homePageData: Entry<IHomePage>
+interface NavigationProps {
+  navMainData: Entry<INavigation>
+  locale: string;
+  onLocaleChange: (newLocale: string) => void;
+  homePageData: any
 }
 
-const HomePage:React.FC<HomePageProps> = ({ homePageData }) => {
-  const videoUrl = (homePageData?.fields?.backgroundVideo as any).fields?.file?.url || ''
-
-  if (!homePageData) {
-    return <div>Chargement...</div>;
-  }
-
-  return(
+const HomePage:React.FC<NavigationProps> = ({ locale, onLocaleChange, homePageData, navMainData }) => {
+  return (
     <Wrapper>
-      {videoUrl && (
-        <VideoBackground autoPlay loop muted playsInline>
-          <source src={videoUrl} type="video/webm" />
-          Your browser does not support the video tag.
-        </VideoBackground>
-      )}
+      <BackgroundVideo homePageData={homePageData}/>
+      <HomeNavigation navMainData={navMainData} onLocaleChange={onLocaleChange} locale={locale}/>
     </Wrapper>
-  )
+  );
 }
 
-export default HomePage;
-
-const VideoBackground = styled.video`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  object-fit: cover;
-`
+export default HomePage
 
 const Wrapper = styled.div`
-  height: 100vh;
-  overflow: hidden;
-`
+  font-family: 'Typnic Headline', sans-serif;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    overflow: hidden;
 
-const Content = styled.div`
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-`;
+    @media (max-width: 450px) {
+      justify-content: start;
+    }
+`

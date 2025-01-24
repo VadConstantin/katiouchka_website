@@ -1,30 +1,22 @@
 "use client"
 
 import styled from 'styled-components';
-import { INavigation } from "@/Types";
+import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
+
 
 interface NavigationProps {
   navMainData: Entry<INavigation>
   locale: string;
   onLocaleChange: (newLocale: string) => void;
-  children: React.ReactNode
-  homePageData: any
 }
 
-const HomeNavigation:React.FC<NavigationProps> = ({ locale, onLocaleChange, children, homePageData, navMainData }) => {
+const HomeNavigation:React.FC<NavigationProps> = ({ navMainData, onLocaleChange, locale }) => {
   const logoUrl = (navMainData?.fields?.logo as any)?.fields?.file?.url;
   const links = (navMainData.fields.navLinks as any)
-  const videoUrl = (homePageData?.fields?.backgroundVideo as any).fields?.file?.url || ''
 
-  return (
-    <Wrapper>
-      {videoUrl && (
-        <VideoBackground autoPlay loop muted playsInline>
-          <source src={videoUrl} type="video/webm" />
-          Your browser does not support the video tag.
-        </VideoBackground>
-      )}
+  return(
+    <>
       <Banner>
         <Spacer />
         <Logo src={logoUrl} alt="logo" />
@@ -47,33 +39,12 @@ const HomeNavigation:React.FC<NavigationProps> = ({ locale, onLocaleChange, chil
       <Credits>
         ©2025 KATIOUCHKAFILMS
       </Credits>
-      <>{children}</>
-    </Wrapper>
-  );
+    </>
+  )
 }
 
-export default HomeNavigation
+export default HomeNavigation;
 
-const Logo = styled.img`
-  width: 300px;
-
-  @media (max-width: 500px) {
-    width: 100%;
-  }
-`
-
-const Wrapper = styled.div`
-  font-family: 'Typnic Headline', sans-serif;
-  display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    overflow: hidden;
-
-    @media (max-width: 500px) {
-      justify-content: start;
-    }
-`
 
 const Banner = styled.div`
   align-items: center;
@@ -82,22 +53,9 @@ const Banner = styled.div`
 `
 
 const Languages = styled.div`
-  opacity: 0;
+  opacity: 1;
   text-align: end;
   flex: 1; 
-`
-
-const Credits = styled.div`
-  font-family: 'Typnic Headline', sans-serif;
-  font-size: 1rem;
-  text-align: center;
-  margin: 10px;
-
-  @media (max-width: 500px) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
 `
 
 const Spacer = styled.div`
@@ -109,10 +67,19 @@ const NavLinks = styled.div`
   align-items: center;
   margin-top: -40px; 
 
-  @media (max-width: 500px) {
+  @media (max-width: 450px) {
     margin-top: 5px;
   }
 `
+
+const Logo = styled.img`
+  width: 300px;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+`
+
 
 const NavLink = styled.a`
   color: black;
@@ -121,20 +88,17 @@ const NavLink = styled.a`
   &:hover {
     color: white;
   }
-
 `
 
-const VideoBackground = styled.video`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  object-fit: cover;
+const Credits = styled.div`
+  font-family: 'Typnic Headline', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  margin: 10px;
 
-  @media (max-width: 768px) {
-    object-fit: contain; 
+  @media (max-width: 450px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 `

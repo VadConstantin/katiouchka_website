@@ -56,6 +56,10 @@ export default HomeNavigation
 
 const Logo = styled.img`
   width: 300px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `
 
 const Wrapper = styled.div`
@@ -65,6 +69,10 @@ const Wrapper = styled.div`
     justify-content: space-between;
     height: 100vh;
     overflow: hidden;
+
+    @media (max-width: 500px) {
+      justify-content: start;
+    }
 `
 
 const Banner = styled.div`
@@ -84,10 +92,15 @@ const Credits = styled.div`
   font-size: 1rem;
   text-align: center;
   margin: 10px;
+
+  @media (max-width: 500px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 `
 
 const Spacer = styled.div`
-
 `
 
 const NavLinks = styled.div`
@@ -95,12 +108,19 @@ const NavLinks = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: -40px; 
+
+  @media (max-width: 500px) {
+    margin-top: 5px;
+  }
 `
 
 const NavLink = styled.a`
   color: black;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-decoration: none;
+  &:hover {
+    color: white;
+  }
 
 `
 
@@ -113,4 +133,8 @@ const VideoBackground = styled.video`
   min-height: 100%;
   z-index: -1;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    object-fit: contain; 
+  }
 `

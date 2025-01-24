@@ -11,8 +11,6 @@ interface HomePageProps {
 const HomePage:React.FC<HomePageProps> = ({ homePageData }) => {
   const videoUrl = (homePageData?.fields?.backgroundVideo as any).fields?.file?.url || ''
 
-  console.log('homepageData ---->', videoUrl)
-
   if (!homePageData) {
     return <div>Chargement...</div>;
   }

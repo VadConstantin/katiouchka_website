@@ -5,6 +5,7 @@ import { IHomePage } from "../Types/contentful";
 import { Entry } from 'contentful';
 import IntroScreen from '@/Components/IntroScreen/IntroScreen';
 import { useState, useEffect } from 'react';
+import styled, { keyframes } from "styled-components";
 
 interface HomeProps {
   locale: string;
@@ -13,48 +14,45 @@ interface HomeProps {
 }
 
 const Home = ({ locale, navMainData, homePageData }: HomeProps) => {
-  const [showIntro, setShowIntro] = useState<boolean | null>(null);
+  const [showIntro, setShowIntro] = useState(false);
+  const [hasSeenIntro, setHasSeenIntro] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
-    const hasSeenIntro = sessionStorage.getItem("seenIntroScreen");
+    const hasSeenIntroBefore = sessionStorage.getItem('hasSeenIntro');
 
-    if (!hasSeenIntro) {
+    if (!hasSeenIntroBefore) {
       setShowIntro(true);
-      sessionStorage.setItem("seenIntroScreen", "true");
-    } else {
-      setShowIntro(false);
+      setHasSeenIntro(true);
     }
+    setIsLoading(false); 
   }, []);
 
-  const handleLocaleChange = (newLocale: string) => {
-    const currentUrl = new URL(window.location.href);
-    currentUrl.searchParams.set('locale', newLocale);
-    window.location.href = currentUrl.toString();
+  const handleFinishIntro = () => {
+    sessionStorage.setItem('hasSeenIntro', 'true');
+    setShowIntro(false);
   };
 
-  if (showIntro === null) {
-    return null;
+  if (isLoading) {
+    return <BlackScreen />;
   }
-
-  // return (
-  //   <div>
-  //     {showIntro ? (
-  //       <IntroScreen onFinish={() => setShowIntro(false)} />
-  //     ) : (
-  //       <HomePage navMainData={navMainData} 
-  //                 locale={locale} 
-  //                 onLocaleChange={handleLocaleChange}  
-  //                 homePageData={homePageData} 
-  //       />
-  //     )}
-  //   </div>
-  // );
 
   return (
     <div>
-
-        <IntroScreen onFinish={() => setShowIntro(false)} />
-
+      {showIntro ? (
+        <IntroScreen onFinish={handleFinishIntro} />
+      ) : (
+        <>
+          {hasSeenIntro && <BlackOverlay />}
+          <HomePage 
+            navMainData={navMainData} 
+            locale={locale} 
+            onLocaleChange={() => {}} 
+            homePageData={homePageData} 
+            hasSeenIntro={hasSeenIntro}
+          />
+        </>
+      )}
     </div>
   );
 };
@@ -70,12 +68,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!navMainData) {
     return {
       redirect: {
-        destination: '/error', 
+        destination: '/error',
         permanent: false,
       },
     };
   }
-  
+
   return {
     props: {
       locale,
@@ -84,3 +82,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+
+const BlackScreen = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 99999;
+`;
+
+const fadeToTransparent = keyframes`
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+`;
+
+const BlackOverlay = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 9999;
+  animation: ${fadeToTransparent} 2s ease-in-out forwards;
+  pointer-events: none; 
+  animation-fill-mode: forwards;
+`;

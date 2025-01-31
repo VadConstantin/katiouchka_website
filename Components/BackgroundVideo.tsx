@@ -61,7 +61,7 @@ const VideoContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 100%;
+  height: 101%;
   z-index: -1;
 `;
 

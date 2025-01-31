@@ -17,6 +17,8 @@ export interface ArtistFields {
   type: string
   backgroundVideo: Asset
   biography: Text
+  biographyEn: Text
+  biographyIt: Text
   works: Array<Iwork>
   orderOfAppearance: number
 }

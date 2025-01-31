@@ -32,7 +32,7 @@ const HomePage: React.FC<NavigationProps> = ({ locale, onLocaleChange, homePageD
 export default HomePage;
 
 const Wrapper = styled.div<{ hasSeenIntro: boolean }>`
-  padding: 5px;
+  padding: 5px 5px 0 5px;
   font-family: 'Typnic Headline', sans-serif;
   display: flex;
   flex-direction: column;

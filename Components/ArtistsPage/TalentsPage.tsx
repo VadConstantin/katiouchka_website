@@ -45,7 +45,6 @@ const TalentsPage:React.FC<TalentsPageProps> = ({ talentsPageData, navMainData }
   );
 };
 
-
 export default TalentsPage
 
 const Wrapper = styled.div`

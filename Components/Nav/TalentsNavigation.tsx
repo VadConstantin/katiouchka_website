@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
 
-
 interface NavigationProps {
   navMainData: Entry<INavigation>
   credits?: boolean

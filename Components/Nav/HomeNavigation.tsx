@@ -94,11 +94,13 @@ const Credits = styled.div`
   font-family: 'Typnic Headline', sans-serif;
   font-size: 1rem;
   text-align: center;
-  margin: 10px;
+  position: relative;
+    top: -5px;
 
   @media (max-width: 450px) {
     position: absolute;
     bottom: 0;
     left: 0;
+    top: initial;
   }
 `

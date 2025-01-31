@@ -13,10 +13,12 @@ export interface Iwork extends EntrySkeletonType<WorkFields> {}
 
 export interface ArtistFields {
   name: string
+  slug: string
   type: string
   backgroundVideo: Asset
   biography: Text
   works: Array<Iwork>
+  orderOfAppearance: number
 }
 
 export interface IArtist extends EntrySkeletonType<ArtistFields> {}

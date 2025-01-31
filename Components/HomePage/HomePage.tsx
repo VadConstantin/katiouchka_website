@@ -12,7 +12,7 @@ interface NavigationProps {
   locale: string;
   onLocaleChange: (newLocale: string) => void;
   homePageData: any;
-  hasSeenIntro: boolean; // Ajout du flag
+  hasSeenIntro: boolean;
 }
 
 const fadeIn = keyframes`
@@ -23,7 +23,7 @@ const fadeIn = keyframes`
 const HomePage: React.FC<NavigationProps> = ({ locale, onLocaleChange, homePageData, navMainData, hasSeenIntro }) => {
   return (
     <Wrapper hasSeenIntro={hasSeenIntro}>
-      <BackgroundVideo homePageData={homePageData} />
+      <BackgroundVideo video={homePageData?.fields?.backgroundVideo} />
       <HomeNavigation navMainData={navMainData} onLocaleChange={onLocaleChange} locale={locale} />
     </Wrapper>
   );

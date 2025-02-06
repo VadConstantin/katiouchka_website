@@ -4,46 +4,44 @@ import styled from 'styled-components';
 import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
 
-interface NavigationProps {
+interface TalentNavigationProps {
   navMainData: Entry<INavigation>
   credits?: boolean
-  isLogoNegative?: boolean
 }
 
-const TalentsNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLogoNegative }) => {
+const TalentNavigation:React.FC<TalentNavigationProps> = ({ navMainData, credits }) => {
   const logoUrl = (navMainData?.fields?.logo as any)?.fields?.file?.url;
   const links = (navMainData.fields.navLinks as any)
 
   return(
     <NavWrapper>
-      <a href="/">
-        { isLogoNegative ? <LogoNegative src={logoUrl} alt="logo" /> : <Logo src={logoUrl} alt="logo" /> }
-      </a>
-      <NavLinks>
-        {links.map((link: any, i: number) => {
-          return (
-            <NavLink href={link.fields.link} key={link.sys.id}> 
-              {link.fields.name}
-            </NavLink>
-          )
-        })}
-      </NavLinks>
-      {credits && 
-        <Credits>
-          ©2025 KATIOUCHKAFILMS
-        </Credits>}
-    </NavWrapper>
+    <a href="/">
+      <Logo src={logoUrl} alt="logo" /> 
+    </a>
+    <NavLinks>
+      {links.map((link: any, i: number) => {
+        return (
+          <NavLink href={link.fields.link} key={link.sys.id}> 
+            {link.fields.name}
+          </NavLink>
+        )
+      })}
+    </NavLinks>
+    {credits && 
+      <Credits>
+        ©2025 KATIOUCHKAFILMS
+      </Credits>}
+  </NavWrapper>
   )
 }
 
-export default TalentsNavigation;
-
+export default TalentNavigation;
 
 const NavLinks = styled.div`
 
   display: flex;
     justify-content: space-between;
-  position: absolute;
+  width: 300px;
   bottom: 5px;
   left: 0%;
   right: 0;
@@ -53,22 +51,6 @@ const NavLinks = styled.div`
     width: 100%;
     justify-content: space-between;
   } 
-`
-
-const LogoNegative = styled.img`
-  width: 300px;
-  mix-blend-mode: difference;
-  filter: invert(1) grayscale(100%) contrast(10%);
-  &:hover {
-    mix-blend-mode: normal; 
-    filter: none; 
-  }
-
-  @media (max-width: 550px) {
-    width: 100%;
-    opacity: 1;
-    color: black;
-  }
 `
 
 const Logo = styled.img`
@@ -86,20 +68,22 @@ const Logo = styled.img`
 `
 
 
-
 const NavLink = styled.a`
   color: black;
   font-size: 1.2rem;
   text-decoration: none;
-  opacity: 0.5;
+  opacity: 1;
   &:hover {
-    opacity: 1;
+    opacity: 0.3;
   }
 `
 
 const NavWrapper = styled.div`
   padding-bottom: 80px;
-  text-align: center;
+  display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 
 `
 
@@ -112,3 +96,4 @@ const Credits = styled.div`
   left: 0;
   opacity: 0;
 `
+

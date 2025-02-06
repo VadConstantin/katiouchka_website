@@ -25,7 +25,7 @@ const TalentsPage:React.FC<TalentsPageProps> = ({ talentsPageData, navMainData }
 
   return (
     <Wrapper>
-      <TalentsNavigation navMainData={navMainData} credits />
+      <TalentsNavigation navMainData={navMainData} credits isLogoNegative />
       <BackgroundVideo video={memoizedVideo} margin={0} />
       <TalentsWrapper>
         {talentsPageData

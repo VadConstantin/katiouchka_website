@@ -74,6 +74,8 @@ const NavLinks = styled.div`
 
 const Logo = styled.img`
   width: 300px;
+  mix-blend-mode: difference;
+  filter: invert(1) grayscale(100%) contrast(10%);
 
   @media (max-width: 450px) {
     width: 100%;
@@ -85,8 +87,9 @@ const NavLink = styled.a`
   color: black;
   font-size: 1.2rem;
   text-decoration: none;
+  opacity: 1;
   &:hover {
-    color: white;
+    opacity: 0.2;
   }
 `
 
@@ -96,6 +99,7 @@ const Credits = styled.div`
   text-align: center;
   position: relative;
     top: -5px;
+  opacity: 0;
 
   @media (max-width: 450px) {
     position: absolute;

@@ -1,6 +1,6 @@
 "use client"
 
-import TalentsNavigation from '@/Components/Nav/TalentsNavigation';
+import TalentNavigation from '@/Components/Nav/TalentNavigation';
 import { IArtist, INavigation } from '@/types/contentful';
 import { Entry } from 'contentful';
 import { useState } from 'react';
@@ -26,14 +26,15 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
 
   return (
     <TalentWrapper>
-      <TalentsNavigation navMainData={navMainData} />
-      
+      <TalentNavigation navMainData={navMainData} credits/>
       <ContentWrapper> 
         <TabContent key={tabToDisplay}>
           {tabToDisplay === 'PROJECTS' && works.length > 0 && (
             <Works>
               {works.map((work) => (
-                <div key={work.sys.id}>{work.fields.name}</div>
+                <div key={work.sys.id}>
+                  {work.fields.name}
+                </div>
               ))}
             </Works>
           )}
@@ -55,7 +56,6 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
           }
         </TabContent>
       </ContentWrapper>
-
       <BottomWrapper>
         <Name>{talentData?.fields?.name as any}</Name>
         <Links>
@@ -75,7 +75,7 @@ export default TalentPage;
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -98,7 +98,7 @@ const ContentWrapper = styled.div`
 `;
 
 const TabContent = styled.div`
-  animation: ${fadeIn} 0.8s ease-in-out;
+  animation: ${fadeIn} 0.5s ease-in-out;
 `;
 
 const Works = styled.div`
@@ -138,6 +138,11 @@ const Links = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 2rem;
+  
+  @media (max-width: 650px) {
+    padding-top: 15px;
+  }
+
 `;
 
 const Bios = styled.div`

@@ -13,7 +13,9 @@ interface TalentsPageProps {
 }
 
 const TalentsPage:React.FC<TalentsPageProps> = ({ talentsPageData, navMainData }) => {
-  const [hoveredTalent, setHoveredTalent] = useState<Entry<IArtist> | null>(null);
+
+  const sortedTalents = talentsPageData.sort((a, b) => (a.fields.orderOfAppearance as any ?? 0) - (b.fields.orderOfAppearance as any ?? 0))
+  const [hoveredTalent, setHoveredTalent] = useState<Entry<IArtist> | null>(sortedTalents[0]);
 
   const handleMouseEnter = (talent: Entry<IArtist>) => {
     if (hoveredTalent !== talent.fields.name as any) {
@@ -25,21 +27,19 @@ const TalentsPage:React.FC<TalentsPageProps> = ({ talentsPageData, navMainData }
 
   return (
     <Wrapper>
-      <TalentsNavigation navMainData={navMainData} credits isLogoNegative />
+      <TalentsNavigation navMainData={navMainData} credits />
       <BackgroundVideo video={memoizedVideo} margin={0} />
       <TalentsWrapper>
-        {talentsPageData
-          .sort((a, b) => (a.fields.orderOfAppearance as any ?? 0) - (b.fields.orderOfAppearance as any ?? 0))
-          .map((talent) => (
-            <Talent 
-              key={talent.sys.id} 
-              href={`/talents/${talent.fields.slug}`} 
-              onMouseEnter={() => handleMouseEnter(talent)}
-            >
-              <Name>{talent.fields.name as any}</Name>
-              <Type>{talent.fields.type as any}</Type>
-            </Talent>
-          ))}
+        {sortedTalents.map((talent) => (
+          <Talent 
+            key={talent.sys.id} 
+            href={`/talents/${talent.fields.slug}`} 
+            onMouseEnter={() => handleMouseEnter(talent)}
+          >
+            <Name>{talent.fields.name as any}</Name>
+            <Type>{talent.fields.type as any}</Type>
+          </Talent>
+        ))}
       </TalentsWrapper>
     </Wrapper>
   );
@@ -48,8 +48,14 @@ const TalentsPage:React.FC<TalentsPageProps> = ({ talentsPageData, navMainData }
 export default TalentsPage
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   padding: 0.5rem;
-`
+  position: relative;
+`;
 
 const Talent = styled.a`
   letter-spacing: -2px;
@@ -67,13 +73,17 @@ const Talent = styled.a`
 
   @media (max-width: 700px) {
     line-height: 1.2;
-    opacity: 0.5
+    opacity: 0.8;
   }
 `
 
 const TalentsWrapper = styled.div`
   display: flex;
     flex-direction: column;
+    
+  @media (max-width: 700px) {
+    gap: 15px;
+  }
 `
 
 const Type = styled.div`
@@ -85,6 +95,7 @@ const Type = styled.div`
 
   @media (max-width: 700px) {
     letter-spacing: 0px;
+    font-size: clamp(0.8rem, 3vw, 3rem); 
   }
 `;
 
@@ -94,4 +105,8 @@ const Name = styled.div`
   white-space: wrap;
   font-size: clamp(1rem, 6vw, 6rem);
   text-transform: uppercase;
+
+  @media (max-width: 700px) {
+    font-size: clamp(2rem, 6vw, 6rem);
+  }
 `;

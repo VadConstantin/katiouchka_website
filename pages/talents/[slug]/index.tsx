@@ -2,8 +2,6 @@ import { GetServerSideProps } from 'next';
 import { getTalentData, getNavigationData } from '@/Services/get_contentful_data';
 import { Entry } from 'contentful';
 import { IArtist, INavigation } from '@/types/contentful';
-
-
 import TalentPage from '@/Components/ArtistPage/TalentPage';
 
 interface TalentPageProps {

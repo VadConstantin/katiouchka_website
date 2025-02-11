@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
+import { useRouter } from "next/router";
 
 interface NavigationProps {
   navMainData: Entry<INavigation>
@@ -14,6 +15,9 @@ const TalentsNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isL
   const logoUrl = (navMainData?.fields?.logo as any)?.fields?.file?.url;
   const links = (navMainData.fields.navLinks as any)
 
+  const router = useRouter()
+  const currentPath = router.asPath;
+
   return(
     <NavWrapper>
       <a href="/">
@@ -21,8 +25,9 @@ const TalentsNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isL
       </a>
       <NavLinks>
         {links.map((link: any, i: number) => {
+          const isActive = currentPath === link.fields.link;
           return (
-            <NavLink href={link.fields.link} key={link.sys.id}> 
+            <NavLink href={link.fields.link} key={link.sys.id} isActive={isActive}> 
               {link.fields.name}
             </NavLink>
           )
@@ -40,14 +45,13 @@ export default TalentsNavigation;
 
 
 const NavLinks = styled.div`
-
   display: flex;
     justify-content: space-between;
   position: absolute;
   bottom: 5px;
   left: 0%;
   right: 0;
-  padding: 0 10px 0 10px;
+  z-index: 200;
 
   @media (max-width: 550px) {
     width: 100%;
@@ -85,21 +89,39 @@ const Logo = styled.img`
   }
 `
 
-
-
-const NavLink = styled.a`
+const NavLink = styled.a<{isActive: boolean}>`
   color: black;
   font-size: 1.2rem;
   text-decoration: none;
-  opacity: 0.5;
-  &:hover {
-    opacity: 1;
+  position: relative;
+  display: inline-block; 
+  padding-bottom: 2px; 
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 4px;
+    background-color: black;
+    transition: width 0.2s ease-in-out;
+    width: ${({ isActive }) => (isActive ? "100%" : "0%")};
+  }
+
+  &:hover::after {
+    width: 100%;
   }
 `
 
 const NavWrapper = styled.div`
-  padding-bottom: 80px;
+  position: absolute;
+  padding-bottom: 30px;
   text-align: center;
+  top: 5px;
+  @media (max-width: 550px) {
+    margin: 0 5px;
+  } 
 
 `
 
@@ -111,4 +133,6 @@ const Credits = styled.div`
   bottom: 0;
   left: 0;
   opacity: 0;
+
+
 `

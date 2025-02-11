@@ -5,9 +5,10 @@ export interface WorkFields {
   name: string
   locale: string
   medias: Array<Asset>
+  typeOfMedia: "video(s)" | "photo(s)"
 }
 
-export interface Iwork extends EntrySkeletonType<WorkFields> {}
+export interface IWork extends EntrySkeletonType<WorkFields> {}
 
 
 
@@ -19,7 +20,7 @@ export interface ArtistFields {
   biography: Text
   biographyEn: Text
   biographyIt: Text
-  works: Array<Iwork>
+  works: Array<IWork>
   orderOfAppearance: number
 }
 
@@ -58,7 +59,7 @@ export interface IHomePage extends EntrySkeletonType<HomePageFields> {}
 
 export interface WorkPagefields {
   selection: "automatic" | "manual"
-  works: Array<Iwork>
+  works: Array<IWork>
 }
 
 export interface IWorkPage extends EntrySkeletonType<WorkPagefields> {}

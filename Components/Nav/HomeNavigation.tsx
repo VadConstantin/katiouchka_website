@@ -74,8 +74,8 @@ const NavLinks = styled.div`
 
 const Logo = styled.img`
   width: 300px;
-  mix-blend-mode: difference;
-  filter: invert(1) grayscale(100%) contrast(10%);
+  /* mix-blend-mode: difference;
+  filter: invert(1) grayscale(100%) contrast(10%); */
 
   @media (max-width: 450px) {
     width: 100%;
@@ -87,11 +87,30 @@ const NavLink = styled.a`
   color: black;
   font-size: 1.2rem;
   text-decoration: none;
-  opacity: 1;
+  position: relative;
+  display: inline-block; 
+  padding-bottom: 2px; 
+
   &:hover {
-    opacity: 0.2;
+    opacity: 0.7;
   }
-`
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 4px;
+    background-color: black;
+    transition: width 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+`;
+
 
 const Credits = styled.div`
   font-family: 'Typnic Headline', sans-serif;

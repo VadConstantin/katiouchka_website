@@ -5,6 +5,7 @@ import { IArtist, INavigation } from '@/types/contentful';
 import { Entry } from 'contentful';
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Work from '../Work/Work';
 
 interface TalentPageProps {
   navMainData: Entry<INavigation>
@@ -33,7 +34,7 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
             <Works>
               {works.map((work) => (
                 <div key={work.sys.id}>
-                  {work.fields.name}
+                  <Work work={work} />
                 </div>
               ))}
             </Works>
@@ -87,7 +88,7 @@ const TalentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 0.5rem;
+  padding: 5px;
 `;
 
 const ContentWrapper = styled.div`
@@ -103,6 +104,9 @@ const TabContent = styled.div`
 
 const Works = styled.div`
   display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 100px;
 `;
 
 const BottomWrapper = styled.div`

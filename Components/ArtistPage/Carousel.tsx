@@ -7,44 +7,15 @@ interface CarouselProps {
   imageUrls: string[];
   workSlug: string;
   talentSlug: string;
+  scrollOffset: number;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug }) => {
+const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, scrollOffset }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [offsetY, setOffsetY] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      console.log('on scroll !!!!!!')
-      if (!containerRef.current) return;
+  console.log('scroll carousel --->', scrollOffset)
 
-      console.log("SCROLL DETECTÉ ✅", containerRef.current.scrollTop);
-
-      const scrollTop = containerRef.current.scrollTop; // 🔥 Détecte le scroll
-      const maxScroll = containerRef.current.scrollHeight - containerRef.current.clientHeight;
-      const scrollFactor = scrollTop / maxScroll;
-
-      // ✅ Effet de parallaxe proportionnel au scroll
-      const newOffsetY = scrollFactor * -50;
-      setOffsetY(newOffsetY);
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      console.log('container !!!!')
-      container.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
-
-  // 🎥 Démarrer le carrousel au hover
   const startCarousel = () => {
     if (!intervalRef.current) {
       setCurrentIndex((prev) => (prev + 1) % imageUrls.length);
@@ -54,7 +25,6 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug }) 
     }
   };
 
-  // 🛑 Arrêter le carrousel au départ du hover
   const stopCarousel = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -63,7 +33,7 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug }) 
   };
 
   return (
-    <CarouselContainer ref={containerRef}>
+    <CarouselContainer>
       {imageUrls.map((url, i) => (
         <CustomLink
           key={i}
@@ -75,7 +45,7 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug }) 
             src={url}
             alt={`Image ${i + 1}`}
             isActive={i === currentIndex}
-            offsetY={offsetY}
+            offsetY={scrollOffset}
           />
         </CustomLink>
       ))}
@@ -85,26 +55,24 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug }) 
 
 export default Carousel;
 
-// ➤ Effet parallaxe 🚀
 const Slider = styled.img<{ isActive: boolean; offsetY: number }>`
   position: absolute;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 120%;
+  height: 120%;
   object-fit: cover;
   opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  transform: translateY(${({ offsetY }) => `${offsetY}px`}); // ✅ Effet de parallaxe
-  transition: opacity 0.2s ease-in-out, transform 0.3s ease-out;
+  transform: translateY(${({ offsetY }) => `${-offsetY * 0.2}px`});
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease-out; 
 `;
 
 const CarouselContainer = styled.div`
   position: relative;
   width: clamp(280px, 80vw, 800px);
   height: clamp(147px, 42vw, 420px);
-  overflow-y: auto; /* 🔥 Permet de scroller à l'intérieur */
+  overflow: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  border: 2px solid red; /* DEBUG : Affiche bien le container */
 
   @media (max-width: 800px) {
     width: 98vw;

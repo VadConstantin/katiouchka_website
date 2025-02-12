@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import TalentNavigation from '@/Components/Nav/TalentNavigation';
 import { IArtist, INavigation } from '@/types/contentful';
 import { Entry } from 'contentful';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import Work from '../Work/Work';
 
@@ -20,6 +20,30 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
   const bioIT = talentData.fields.biographyIt;
 
   const [tabToDisplay, setTabToDisplay] = useState("PROJECTS");
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current) return;
+
+      const scrollTop = contentRef.current.scrollTop;
+      console.log("🔥 Scroll détecté :", scrollTop);
+      setScrollOffset(scrollTop);
+    };
+
+    const content = contentRef.current;
+    if (content) {
+      content.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (content) {
+        content.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   const handleClick = (link: string) => {
     setTabToDisplay(link);
@@ -28,14 +52,14 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
   return (
     <TalentWrapper>
       <TalentNavigation navMainData={navMainData} credits />
-      
-      <ContentWrapper isBiography={tabToDisplay === 'BIOGRAPHY'}>
+      <ContentWrapper ref={contentRef} isBiography={tabToDisplay === 'BIOGRAPHY'}>
         <TabContent key={tabToDisplay}>
           {tabToDisplay === 'PROJECTS' && works.length > 0 && (
             <Works>
-              {works.map((work) => (
-                <div key={work.sys.id}>
-                  <Work work={work} talentSlug={talentData.fields.slug as any}/>
+              {works.map((work, i) => (
+                <div key={i}>
+                  {/* ⬇️ Passe le scrollOffset en prop aux `Work` */}
+                  <Work work={work} talentSlug={talentData.fields.slug as any} scrollOffset={scrollOffset} />
                 </div>
               ))}
             </Works>
@@ -74,6 +98,8 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
 };
 
 export default TalentPage;
+
+
 
 const fadeIn = keyframes`
   from {

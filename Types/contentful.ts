@@ -6,6 +6,7 @@ export interface WorkFields {
   locale: string
   medias: Array<Asset>
   typeOfMedia: "video(s)" | "photo(s)"
+  slug: string
 }
 
 export interface IWork extends EntrySkeletonType<WorkFields> {}

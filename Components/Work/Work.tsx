@@ -5,9 +5,10 @@ import Carousel from "../ArtistPage/Carousel";
 
 interface WorkProps {
   work: IWork
+  talentSlug: string
 }
 
-const Work:React.FC<WorkProps> = ({ work }) => {
+const Work:React.FC<WorkProps> = ({ work, talentSlug }) => {
 
   const urls = work.fields.medias.map((media: any) => {
     return media.fields.file.url
@@ -17,11 +18,9 @@ const Work:React.FC<WorkProps> = ({ work }) => {
   return(
     <Wrapper>
       {work.fields.typeOfMedia === 'photo(s)' && 
-        <Carousel urls={urls}/>
+        <Carousel imageUrls={urls} workSlug={work.fields.slug} talentSlug={talentSlug}/>
       }
-
       { work.fields.name }
-      { work.fields.typeOfMedia}
     </Wrapper>
   )
 }

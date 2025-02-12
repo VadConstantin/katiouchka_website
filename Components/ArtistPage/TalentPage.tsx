@@ -4,7 +4,7 @@ import TalentNavigation from '@/Components/Nav/TalentNavigation';
 import { IArtist, INavigation } from '@/types/contentful';
 import { Entry } from 'contentful';
 import { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import Work from '../Work/Work';
 
 interface TalentPageProps {
@@ -27,14 +27,15 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
 
   return (
     <TalentWrapper>
-      <TalentNavigation navMainData={navMainData} credits/>
-      <ContentWrapper> 
+      <TalentNavigation navMainData={navMainData} credits />
+      
+      <ContentWrapper isBiography={tabToDisplay === 'BIOGRAPHY'}>
         <TabContent key={tabToDisplay}>
           {tabToDisplay === 'PROJECTS' && works.length > 0 && (
             <Works>
               {works.map((work) => (
                 <div key={work.sys.id}>
-                  <Work work={work} />
+                  <Work work={work} talentSlug={talentData.fields.slug as any}/>
                 </div>
               ))}
             </Works>
@@ -50,13 +51,14 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
                 {bioEN as any}
               </Bio>
               <Bio>
-              <BioTitle>IT</BioTitle>
+                <BioTitle>IT</BioTitle>
                 {bioIT as any}
               </Bio>
             </Bios>
           }
         </TabContent>
       </ContentWrapper>
+
       <BottomWrapper>
         <Name>{talentData?.fields?.name as any}</Name>
         <Links>
@@ -91,11 +93,21 @@ const TalentWrapper = styled.div`
   padding: 5px;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ isBiography: boolean }>`
   flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-bottom: 100px;
+
+  ${({ isBiography }) =>
+    isBiography &&
+    css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: none;
+    max-height: initial;
+    `}
 `;
 
 const TabContent = styled.div`
@@ -104,13 +116,14 @@ const TabContent = styled.div`
 
 const Works = styled.div`
   display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 100px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 100px;
 `;
 
 const BottomWrapper = styled.div`
-  margin-top: auto;
+  position: sticky;
+  bottom: 0;
   background: white;
   padding-bottom: 1rem;
   padding-top: 50px;
@@ -146,7 +159,6 @@ const Links = styled.div`
   @media (max-width: 650px) {
     padding-top: 15px;
   }
-
 `;
 
 const Bios = styled.div`

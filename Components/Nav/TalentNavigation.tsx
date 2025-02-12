@@ -97,7 +97,7 @@ const NavLink = styled.a`
 `;
 
 const NavWrapper = styled.div`
-  padding-bottom: 80px;
+  padding-bottom: 20px;
   display: flex;
     flex-direction: column;
     align-content: center;

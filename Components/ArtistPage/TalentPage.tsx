@@ -144,7 +144,7 @@ const Works = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 100px;
+  gap: 20px;
 `;
 
 const BottomWrapper = styled.div`
@@ -152,7 +152,7 @@ const BottomWrapper = styled.div`
   bottom: 0;
   background: white;
   padding-bottom: 1rem;
-  padding-top: 50px;
+  padding-top: 20px;
   z-index: 10;
 `;
 

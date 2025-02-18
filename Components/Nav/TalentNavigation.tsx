@@ -102,7 +102,10 @@ const NavWrapper = styled.div`
     flex-direction: column;
     align-content: center;
     align-items: center;
-
+  /* position: sticky;
+  top: 0px; */
+  z-index: 10000;
+  background-color: white;
 `
 
 const Credits = styled.div`

@@ -24,12 +24,13 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
 
   const contentRef = useRef<HTMLDivElement | null>(null);
 
+
+
   useEffect(() => {
     const handleScroll = () => {
       if (!contentRef.current) return;
 
       const scrollTop = contentRef.current.scrollTop;
-      console.log("🔥 Scroll détecté :", scrollTop);
       setScrollOffset(scrollTop);
     };
 
@@ -58,7 +59,6 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
             <Works>
               {works.map((work, i) => (
                 <div key={i}>
-                  {/* ⬇️ Passe le scrollOffset en prop aux `Work` */}
                   <Work work={work} talentSlug={talentData.fields.slug as any} scrollOffset={scrollOffset} />
                 </div>
               ))}
@@ -121,9 +121,6 @@ const TalentWrapper = styled.div`
 
 const ContentWrapper = styled.div<{ isBiography: boolean }>`
   flex-grow: 1;
-  max-height: 70vh;
-  overflow-y: auto;
-  padding-bottom: 100px;
 
   ${({ isBiography }) =>
     isBiography &&
@@ -141,11 +138,18 @@ const TabContent = styled.div`
 `;
 
 const Works = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* ✅ 2 colonnes si possible */
+  gap: 10px; /* ✅ Espace entre les images */
+  width: 100%;
+  justify-content: center;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr; /* ✅ Une seule colonne sur mobile */
+  }
 `;
+
+
 
 const BottomWrapper = styled.div`
   position: sticky;

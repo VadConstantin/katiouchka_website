@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { IWork } from '@/types/contentful';
 import Carousel from "../ArtistPage/Carousel";
+import VideoPlayer from "../ArtistPage/VideoPlayer";
 
 interface WorkProps {
   work: IWork;
@@ -11,27 +12,48 @@ interface WorkProps {
 
 const Work: React.FC<WorkProps> = ({ work, talentSlug, scrollOffset }) => {
   const urls = work.fields.medias.map((media: any) => media.fields.file.url) ?? [];
+  const workName = work.fields.name || ''
+  const video = work.fields.medias
+  const photoDisposition = work.fields.photoDisposition ?? 'landscape'
 
   return (
-    <Wrapper>
+    <WorkWrapper>
       {work.fields.typeOfMedia === 'photo(s)' && (
         <Carousel
           imageUrls={urls}
           workSlug={work.fields.slug}
           talentSlug={talentSlug}
-          scrollOffset={scrollOffset}
+          photoDisposition={photoDisposition}
         />
       )}
-      {work.fields.name}
-    </Wrapper>
+      {work.fields.typeOfMedia === 'video(s)' && (
+        <VideoPlayer
+          video={video}
+          workSlug={work.fields.slug}
+          talentSlug={talentSlug}
+        />
+      )}
+      <WorkTitle>{workName}</WorkTitle>
+    </WorkWrapper>
   );
 };
 
 export default Work;
 
-const Wrapper = styled.div`
-  font-family: 'Diatype', sans-serif;
+const WorkWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+    flex-direction: column;
+    gap: 5px;
+  padding-bottom: 10px;
+  width: 100%;
+  align-items: center;
 `;
+
+
+const WorkTitle = styled.div`
+  font-family: 'Diatype', sans-serif;
+  font-size: 0.8rem;
+
+`
+
+

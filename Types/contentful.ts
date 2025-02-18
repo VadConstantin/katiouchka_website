@@ -7,6 +7,8 @@ export interface WorkFields {
   medias: Array<Asset>
   typeOfMedia: "video(s)" | "photo(s)"
   slug: string
+  description?: string
+  photoDisposition?: "portrait" | "landscape"
 }
 
 export interface IWork extends EntrySkeletonType<WorkFields> {}

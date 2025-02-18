@@ -1,6 +1,6 @@
 import { createClient } from 'contentful';
 import { Entry } from 'contentful';
-import { IHomePage, INavigation, IArtist, IWork } from '../types/contentful';
+import { IHomePage, INavigation, IArtist, IWork, IWorkPage } from '../types/contentful';
 import 'dotenv/config';
 
 
@@ -46,18 +46,29 @@ export const getTalentData = async (slug: string):Promise<Entry<IArtist>> => {
   return entries.items[0]
 } 
 
-export const getWorkPageData = async (slug: string):Promise<Entry<IWork>> => {
-  console.log("slug ------------>", slug)
+export const getTalentWorkData = async (slug: string):Promise<Entry<IWork>> => {
   const entries = await contentful.getEntries<IWork>({
     content_type: 'work',
     'fields.slug': slug,
     limit: 1
-
- 
   } as any)
 
-
-
   return entries.items[0]
+}
+
+export const getWorkPageData = async (): Promise<Entry<IWorkPage>> => {
+  const entries = await contentful.getEntries<IWorkPage>({
+    content_type: 'workPage',
+    limit: 1
+  })
+  return entries.items[0]
+}
+
+export const getAllWorks = async (): Promise<Array<Entry<IWork>>> => {
+  const entries = await contentful.getEntries<IWork>({
+    content_type: 'work'
+  })
+
+  return entries.items
 }
 

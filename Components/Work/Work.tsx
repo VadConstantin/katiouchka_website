@@ -7,10 +7,9 @@ import VideoPlayer from "../ArtistPage/VideoPlayer";
 interface WorkProps {
   work: IWork;
   talentSlug: string;
-  scrollOffset: number;
 }
 
-const Work: React.FC<WorkProps> = ({ work, talentSlug, scrollOffset }) => {
+const Work: React.FC<WorkProps> = ({ work, talentSlug }) => {
   const urls = work.fields.medias.map((media: any) => media.fields.file.url) ?? [];
   const workName = work.fields.name || ''
   const video = work.fields.medias

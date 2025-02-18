@@ -1,11 +1,11 @@
 "use client";
 
-import TalentNavigation from '@/Components/Nav/TalentNavigation';
-import { IArtist, INavigation } from '@/types/contentful';
-import { Entry } from 'contentful';
-import { useState, useEffect, useRef } from 'react';
-import styled, { keyframes, css } from 'styled-components';
-import Work from '../Work/Work';
+import TalentNavigation from '@/Components/Nav/TalentNavigation'
+import { IArtist, INavigation } from '@/types/contentful'
+import { Entry } from 'contentful'
+import { useState, useRef } from 'react'
+import styled, { keyframes, css } from 'styled-components'
+import Work from '../Work/Work'
 
 interface TalentPageProps {
   navMainData: Entry<INavigation>
@@ -13,53 +13,31 @@ interface TalentPageProps {
 }
 
 const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
-  const works = Array.isArray(talentData.fields.works) ? talentData.fields.works : [];
-  const talentLinks = ["PROJECTS", "BIOGRAPHY"];
-  const bioFR = talentData.fields.biography;
-  const bioEN = talentData.fields.biographyEn;
-  const bioIT = talentData.fields.biographyIt;
+  const works = Array.isArray(talentData.fields.works) ? talentData.fields.works : []
+  const talentLinks = ["PROJECTS", "BIOGRAPHY"]
+  const bioFR = talentData.fields.biography
+  const bioEN = talentData.fields.biographyEn
+  const bioIT = talentData.fields.biographyIt
 
-  const [tabToDisplay, setTabToDisplay] = useState("PROJECTS");
-  const [scrollOffset, setScrollOffset] = useState(0);
+  const [tabToDisplay, setTabToDisplay] = useState("PROJECTS")
+  const contentRef = useRef<HTMLDivElement | null>(null)
 
-  const contentRef = useRef<HTMLDivElement | null>(null);
-
-
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!contentRef.current) return;
-
-      const scrollTop = contentRef.current.scrollTop;
-      setScrollOffset(scrollTop);
-    };
-
-    const content = contentRef.current;
-    if (content) {
-      content.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (content) {
-        content.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+  const hasLessThanThreeWorks = works.length < 3
 
   const handleClick = (link: string) => {
-    setTabToDisplay(link);
+    setTabToDisplay(link)
   };
 
   return (
     <TalentWrapper>
       <TalentNavigation navMainData={navMainData} credits />
-      <ContentWrapper ref={contentRef} isBiography={tabToDisplay === 'BIOGRAPHY'}>
+      <ContentWrapper ref={contentRef} isBiography={tabToDisplay === 'BIOGRAPHY'} hasLessThanThreeWorks={hasLessThanThreeWorks}>
         <TabContent key={tabToDisplay}>
           {tabToDisplay === 'PROJECTS' && works.length > 0 && (
             <Works>
               {works.map((work, i) => (
                 <div key={i}>
-                  <Work work={work} talentSlug={talentData.fields.slug as any} scrollOffset={scrollOffset} />
+                  <Work work={work} talentSlug={talentData.fields.slug as any} />
                 </div>
               ))}
             </Works>
@@ -82,7 +60,6 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
           }
         </TabContent>
       </ContentWrapper>
-
       <BottomWrapper>
         <Name>{talentData?.fields?.name as any}</Name>
         <Links>
@@ -98,7 +75,6 @@ const TalentPage: React.FC<TalentPageProps> = ({ navMainData, talentData }) => {
 };
 
 export default TalentPage;
-
 
 
 const fadeIn = keyframes`
@@ -119,7 +95,7 @@ const TalentWrapper = styled.div`
   padding: 5px;
 `;
 
-const ContentWrapper = styled.div<{ isBiography: boolean }>`
+const ContentWrapper = styled.div<{ isBiography: boolean, hasLessThanThreeWorks: boolean }>`
   flex-grow: 1;
 
   ${({ isBiography }) =>
@@ -131,6 +107,12 @@ const ContentWrapper = styled.div<{ isBiography: boolean }>`
     overflow-y: none;
     max-height: initial;
     `}
+
+  ${({hasLessThanThreeWorks}) => hasLessThanThreeWorks &&
+    css`
+      align-content: center;
+    `
+  }
 `;
 
 const TabContent = styled.div`
@@ -139,17 +121,15 @@ const TabContent = styled.div`
 
 const Works = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* ✅ 2 colonnes si possible */
-  gap: 10px; /* ✅ Espace entre les images */
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  gap: 10px;
   width: 100%;
   justify-content: center;
 
   @media (max-width: 850px) {
-    grid-template-columns: 1fr; /* ✅ Une seule colonne sur mobile */
+    grid-template-columns: 1fr;
   }
 `;
-
-
 
 const BottomWrapper = styled.div`
   position: sticky;
@@ -157,7 +137,7 @@ const BottomWrapper = styled.div`
   background: white;
   padding-bottom: 1rem;
   padding-top: 20px;
-  z-index: 10;
+  z-index: 10000;
 `;
 
 const Name = styled.div`

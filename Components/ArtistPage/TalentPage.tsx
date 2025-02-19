@@ -103,7 +103,7 @@ const ContentWrapper = styled.div<{ isBiography: boolean, hasLessThanThreeWorks:
     css`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     overflow-y: none;
     max-height: initial;
     `}
@@ -117,6 +117,7 @@ const ContentWrapper = styled.div<{ isBiography: boolean, hasLessThanThreeWorks:
 
 const TabContent = styled.div`
   animation: ${fadeIn} 0.5s ease-in-out;
+  width: 100%;
 `;
 
 const Works = styled.div`
@@ -176,6 +177,7 @@ const Bios = styled.div`
   line-height: 1.5;
   display: flex;
   justify-content: space-between;
+  width: 100%;
   flex-wrap: wrap;
   gap: 3rem;
 `;

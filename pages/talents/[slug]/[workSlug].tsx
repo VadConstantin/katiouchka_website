@@ -127,6 +127,8 @@ const ContentWrapper = styled.div`
 
 const WorkTitle = styled.div`
   font-size: 3rem;
+  line-height: 40px;
+  padding-bottom: 20px;
 `
 
 const Description = styled.div`

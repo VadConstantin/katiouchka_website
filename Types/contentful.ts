@@ -66,3 +66,12 @@ export interface WorkPagefields {
 }
 
 export interface IWorkPage extends EntrySkeletonType<WorkPagefields> {}
+
+
+export interface FamilyPageFields {
+  texteFr: string
+  texteEn: string
+  texteIt: string
+}
+
+export interface IFamilyPage extends EntrySkeletonType<FamilyPageFields> {}

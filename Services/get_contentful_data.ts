@@ -1,6 +1,6 @@
 import { createClient } from 'contentful';
 import { Entry } from 'contentful';
-import { IHomePage, INavigation, IArtist, IWork, IWorkPage } from '../types/contentful';
+import { IHomePage, INavigation, IArtist, IWork, IWorkPage, IFamilyPage } from '../types/contentful';
 import 'dotenv/config';
 
 
@@ -70,5 +70,13 @@ export const getAllWorks = async (): Promise<Array<Entry<IWork>>> => {
   })
 
   return entries.items
+}
+
+export const getFamilyPageData = async (): Promise<Entry<IFamilyPage>> => {
+  const entries = await contentful.getEntries<IFamilyPage>({
+    content_type: 'familyPage',
+    limit: 1
+  })
+  return entries.items[0]
 }
 

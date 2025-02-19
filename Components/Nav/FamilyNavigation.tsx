@@ -11,7 +11,7 @@ interface NavigationProps {
   isLogoNegative?: boolean
 }
 
-const WorkNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLogoNegative }) => {
+const FamilyNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLogoNegative }) => {
   const logoUrl = (navMainData?.fields?.logo as any)?.fields?.file?.url;
   const links = (navMainData.fields.navLinks as any)
 
@@ -41,7 +41,23 @@ const WorkNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLogo
   )
 }
 
-export default WorkNavigation;
+export default FamilyNavigation;
+
+
+// const NavLinks = styled.div`
+//   display: flex;
+//     justify-content: space-between;
+//   position: absolute;
+//   bottom: 5px;
+//   left: 0%;
+//   right: 0;
+//   z-index: 200;
+
+//   @media (max-width: 550px) {
+//     width: 100%;
+//     justify-content: space-between;
+//   } 
+// `
 
 const NavLinks = styled.div`
   display: flex;
@@ -111,6 +127,7 @@ const NavLink = styled.a<{isActive: boolean}>`
 `
 
 const NavWrapper = styled.div`
+  /* position: absolute; */
   padding-bottom: 30px;
   text-align: center;
   top: 5px;

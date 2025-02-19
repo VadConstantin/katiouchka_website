@@ -5,6 +5,7 @@ import { Entry } from 'contentful';
 import { getWorkPageData, getNavigationData, getAllWorks } from '@/Services/get_contentful_data';
 import { IWorkPage, IWork } from "@/Types/contentful";
 import WorkNavigation from '@/Components/Nav/WorkNavigation';
+import { cp } from 'fs/promises';
 
 interface IndexProps {
   locale: string;
@@ -21,6 +22,9 @@ const Index:React.FC<IndexProps> = ({ locale, navMainData, workPageData, allWork
   return(
     <Wrapper>
       <WorkNavigation navMainData={navMainData}/>
+      <ContentWrapper>
+        this is a test
+      </ContentWrapper>
     </Wrapper>
   )
 }
@@ -62,3 +66,7 @@ const Wrapper = styled.div`
   padding: 0.5rem;
   position: relative;
 `
+
+const ContentWrapper = styled.div`
+  flex-grow: 1;
+` 

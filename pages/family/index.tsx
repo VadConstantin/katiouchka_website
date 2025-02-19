@@ -1,9 +1,9 @@
-import TalentNavigation from '@/Components/Nav/TalentNavigation'
 import { IFamilyPage, INavigation } from '@/types/contentful'
 import { Entry } from 'contentful'
 import styled from 'styled-components'
 import { GetServerSideProps } from 'next'
 import { getFamilyPageData, getNavigationData } from '@/Services/get_contentful_data'
+import FamilyNavigation from '@/Components/Nav/FamilyNavigation'
 
 interface IndexProps {
   navMainData: Entry<INavigation>
@@ -11,15 +11,13 @@ interface IndexProps {
 }
 
 const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
-  console.log('family page data ->', familyPageData)
   const frenchText = familyPageData.fields.texteFr
   const englishText = familyPageData.fields.texteEn
   const italianText = familyPageData.fields.texteIt
 
-
   return(
     <Wrapper>
-      <TalentNavigation navMainData={navMainData} credits />
+      <FamilyNavigation navMainData={navMainData} credits />
       <ContentWrapper>
         <TextsWrapper>
           <Text>

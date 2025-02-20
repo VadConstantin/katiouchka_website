@@ -61,7 +61,7 @@ export interface IHomePage extends EntrySkeletonType<HomePageFields> {}
 
 
 export interface WorkPagefields {
-  selection: "automatic" | "manual"
+  selection?: "automatic" | "manual"
   works: Array<IWork>
 }
 

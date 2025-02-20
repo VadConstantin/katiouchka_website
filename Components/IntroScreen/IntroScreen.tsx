@@ -65,16 +65,6 @@ const IntroContainer = styled.div`
   z-index: 9999;
 `;
 
-// const ZoomLogo = styled.img`
-//   width: 100%;
-//   height: auto;
-//   position: absolute;
-//   bottom: 20px;
-//   left: 0;
-//   right: 20px;
-//   transform-origin: center;
-//   animation: ${zoomIn} 2s cubic-bezier(1, 0, 1, 0) 1s forwards;
-// `;
 
 const ZoomLogo = styled.img`
   width: 98%; /* Réduit un peu la largeur pour laisser de l'espace */
@@ -86,10 +76,6 @@ const ZoomLogo = styled.img`
   transform-origin: center;
   animation: ${zoomIn} 2s cubic-bezier(1, 0, 1, 0) 1s forwards;
 `;
-
-
-
-
 
 const BlackOverlay = styled.div`
   position: absolute;

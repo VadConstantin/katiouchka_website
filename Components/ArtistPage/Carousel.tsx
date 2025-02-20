@@ -16,6 +16,8 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, ph
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const disableLink = talentSlug === ""
+
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -35,7 +37,6 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, ph
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   
-
   const handleMouseEnter = () => {
     if (!intervalRef.current) {
       setCurrentIndex((prev) => (prev + 1) % imageUrls.length);
@@ -52,6 +53,12 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, ph
     }
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, disabled: boolean) => {
+    if (disabled) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <CarouselContainer ref={containerRef} photoDisposition={photoDisposition}>
       <ImageWrapper>
@@ -61,6 +68,8 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, ph
             href={`/talents/${talentSlug}/${workSlug}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            disabled={disableLink}
+            onClick={(e:any) => handleClick(e, true)}
           >
             <Slider
               src={url}
@@ -89,7 +98,6 @@ const CarouselContainer = styled.div<{ photoDisposition: string }>`
   justify-content: center;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-
 `;
 
 const ImageWrapper = styled.div`
@@ -120,8 +128,9 @@ const Slider = styled.img<{ isActive: boolean; offsetY: number }>`
   }
 `;
 
-const CustomLink = styled.a`
+const CustomLink = styled.a<{disabled: boolean}>`
   text-decoration: none;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
 `;
 
 

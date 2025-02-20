@@ -15,23 +15,23 @@ const TalentNavigation:React.FC<TalentNavigationProps> = ({ navMainData, credits
 
   return(
     <NavWrapper>
-    <a href="/">
-      <Logo src={logoUrl} alt="logo" /> 
-    </a>
-    <NavLinks>
-      {links.map((link: any, i: number) => {
-        return (
-          <NavLink href={link.fields.link} key={link.sys.id}> 
-            {link.fields.name}
-          </NavLink>
-        )
-      })}
-    </NavLinks>
-    {credits && 
-      <Credits>
-        ©2025 KATIOUCHKAFILMS
-      </Credits>}
-  </NavWrapper>
+      <a href="/">
+        <Logo src={logoUrl} alt="logo" /> 
+      </a>
+      <NavLinks>
+        {links.map((link: any, i: number) => {
+          return (
+            <NavLink href={link.fields.link} key={link.sys.id}> 
+              {link.fields.name}
+            </NavLink>
+          )
+        })}
+      </NavLinks>
+      {credits && 
+        <Credits>
+          ©2025 KATIOUCHKAFILMS
+        </Credits>}
+    </NavWrapper>
   )
 }
 
@@ -102,8 +102,6 @@ const NavWrapper = styled.div`
     flex-direction: column;
     align-content: center;
     align-items: center;
-  /* position: sticky;
-  top: 0px; */
   z-index: 10000;
   background-color: white;
 `

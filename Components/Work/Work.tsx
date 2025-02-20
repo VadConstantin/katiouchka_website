@@ -6,7 +6,7 @@ import VideoPlayer from "../ArtistPage/VideoPlayer";
 
 interface WorkProps {
   work: IWork;
-  talentSlug: string;
+  talentSlug?: string;
 }
 
 const Work: React.FC<WorkProps> = ({ work, talentSlug }) => {
@@ -21,7 +21,7 @@ const Work: React.FC<WorkProps> = ({ work, talentSlug }) => {
         <Carousel
           imageUrls={urls}
           workSlug={work.fields.slug}
-          talentSlug={talentSlug}
+          talentSlug={talentSlug || ""}
           photoDisposition={photoDisposition}
         />
       )}
@@ -29,7 +29,7 @@ const Work: React.FC<WorkProps> = ({ work, talentSlug }) => {
         <VideoPlayer
           video={video}
           workSlug={work.fields.slug}
-          talentSlug={talentSlug}
+          talentSlug={talentSlug || ""}
         />
       )}
       <WorkTitle>{workName}</WorkTitle>
@@ -48,11 +48,9 @@ const WorkWrapper = styled.div`
   align-items: center;
 `;
 
-
 const WorkTitle = styled.div`
   font-family: 'Diatype', sans-serif;
   font-size: 0.8rem;
-
 `
 
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface VideoPlayerProps {
@@ -11,10 +11,11 @@ interface VideoPlayerProps {
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug }) => {
   const videoUrl = video[0]?.fields?.file?.url ?? "";
+  const disableLink = talentSlug === ""
 
   return (
     <VideoContainer>
-      <CustomLink key={videoUrl} href={`/talents/${talentSlug}/${workSlug}`}>
+      <CustomLink key={videoUrl} href={`/talents/${talentSlug}/${workSlug}`} disabled={disableLink}>
         <VideoPlay key={videoUrl} autoPlay loop muted playsInline>
           <source src={videoUrl} type="video/webm" />
         </VideoPlay>
@@ -42,7 +43,9 @@ const VideoContainer = styled.div`
 `;
 
 
-const CustomLink = styled.a`
+const CustomLink = styled.a<{disabled: boolean}>`
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  pointer-events: none;
   text-decoration: none;
   position: relative;
   display: block;

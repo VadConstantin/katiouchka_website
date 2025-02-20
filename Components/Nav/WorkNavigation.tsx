@@ -117,7 +117,6 @@ const NavWrapper = styled.div`
   @media (max-width: 550px) {
     margin: 0 5px;
   } 
-
 `
 
 const Credits = styled.div`
@@ -128,6 +127,4 @@ const Credits = styled.div`
   bottom: 0;
   left: 0;
   opacity: 0;
-
-
 `

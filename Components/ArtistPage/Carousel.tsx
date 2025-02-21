@@ -54,7 +54,7 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, ph
   };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, disabled: boolean) => {
-    if (disabled) {
+    if (disableLink) {
       e.preventDefault();
     }
   };
@@ -69,7 +69,7 @@ const Carousel: React.FC<CarouselProps> = ({ imageUrls, workSlug, talentSlug, ph
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             disabled={disableLink}
-            onClick={(e:any) => handleClick(e, true)}
+            onClick={(e:any) => handleClick(e, disableLink)}
           >
             <Slider
               src={url}

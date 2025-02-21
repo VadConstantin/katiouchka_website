@@ -54,6 +54,8 @@ export interface INavLink extends EntrySkeletonType<NavLinkFields> {}
 
 export interface HomePageFields {
   backgroundVideo: Asset
+  introVideo: Asset
+  videoIntroLength: string
 }
 
 export interface IHomePage extends EntrySkeletonType<HomePageFields> {}

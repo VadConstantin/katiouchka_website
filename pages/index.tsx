@@ -6,6 +6,7 @@ import { Entry } from 'contentful';
 import IntroScreen from '@/Components/IntroScreen/IntroScreen';
 import { useState, useEffect } from 'react';
 import styled, { keyframes } from "styled-components";
+import IntroScreen2 from '@/Components/IntroScreen/IntroScreen2';
 
 interface HomeProps {
   locale: string;
@@ -34,13 +35,13 @@ const Home = ({ locale, navMainData, homePageData }: HomeProps) => {
   };
 
   if (isLoading) {
-    return <BlackScreen />;
+    return <BlackScreen />
   }
 
   return (
     <div>
       {showIntro ? (
-        <IntroScreen onFinish={handleFinishIntro} />
+        <IntroScreen2 onFinish={handleFinishIntro} introVideo={homePageData.fields.introVideo} length={homePageData.fields.videoIntroLength as any}/>
       ) : (
         <>
           {hasSeenIntro && <BlackOverlay />}

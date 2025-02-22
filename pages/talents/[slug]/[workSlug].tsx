@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { getNavigationData, getTalentData, getTalentWorkData } from '@/Services/get_contentful_data';
-import { IArtist, INavigation, IWork } from '@/types/contentful';
+import { IArtist, INavigation, IWork } from '@/Types/contentful';
 import TalentNavigation from '@/Components/Nav/TalentNavigation';
 import { Entry } from 'contentful';
 import styled from 'styled-components';

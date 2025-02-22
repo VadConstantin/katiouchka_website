@@ -1,4 +1,4 @@
-import { IFamilyPage, INavigation } from '@/types/contentful'
+import { IFamilyPage, INavigation } from '@/Types/contentful'
 import { Entry } from 'contentful'
 import styled from 'styled-components'
 import { GetServerSideProps } from 'next'

@@ -1,6 +1,6 @@
 "use client";
 import styled from "styled-components";
-import { IWork } from '@/types/contentful';
+import { IWork } from '@/Types/contentful';
 import Carousel from "../ArtistPage/Carousel";
 import VideoPlayer from "../ArtistPage/VideoPlayer";
 

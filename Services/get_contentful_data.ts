@@ -1,6 +1,6 @@
 import { createClient } from 'contentful';
 import { Entry } from 'contentful';
-import { IHomePage, INavigation, IArtist, IWork, IWorkPage, IFamilyPage } from '../types/contentful';
+import { IHomePage, INavigation, IArtist, IWork, IWorkPage, IFamilyPage } from '../Types/contentful';
 import 'dotenv/config';
 
 

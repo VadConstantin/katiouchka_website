@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon2.png" type="image/png" />
         <title>Katiouchka Films</title>
       </Head>
       <Component {...pageProps} />

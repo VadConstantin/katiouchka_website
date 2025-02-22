@@ -100,7 +100,7 @@ const TextsWrapper = styled.div`
 const Text = styled.div`
   font-family: 'Diatype', sans-serif;
   line-height: 1;
-  max-width: 500px;
+  max-width: 400px;
   min-width: 350px;
 `;
 

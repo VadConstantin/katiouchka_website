@@ -10,7 +10,7 @@ interface WorkProps {
 }
 
 const Work: React.FC<WorkProps> = ({ work, talentSlug }) => {
-  const urls = work.fields.medias.map((media: any) => media.fields.file.url) ?? [];
+  const urls = work.fields.medias.map((media: any) => media?.fields?.file?.url) ?? [];
   const workName = work.fields.name || ''
   const video = work.fields.medias
   const photoDisposition = work.fields.photoDisposition ?? 'landscape'

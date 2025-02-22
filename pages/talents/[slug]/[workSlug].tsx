@@ -40,7 +40,7 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
           })}
         </Images>
         : <VideoPlayer key={videoUrl as any} autoPlay loop muted playsInline>
-            <source src={videoUrl as any} type="video/webm" />
+            <source src={videoUrl as any} type="video/mp4" />
           </VideoPlayer>
         }
       </ContentWrapper>

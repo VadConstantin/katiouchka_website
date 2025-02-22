@@ -27,7 +27,7 @@ const IntroScreen2: React.FC<IntroScreenProps> = ({ onFinish, introVideo, length
     <IntroContainer>
       <VideoContainer>
         <VideoPlayer key={videoUrl} autoPlay loop muted playsInline>
-          <source src={videoUrl} type="video/webm" />
+          <source src={videoUrl} type="video/mp4" />
         </VideoPlayer>
       </VideoContainer>
     </IntroContainer>

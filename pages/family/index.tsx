@@ -42,20 +42,14 @@ const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
               camelia@katiouchkafilms.com
             </Email>
           </TextAndEmail>
-          <TextAndEmail>
-            ASSOCIATE/EXECUTIVE PRODUCER
-            <Email href="mailto:quentin@katiouchkafilms.com">
-              quentin@katiouchkafilms.com
-            </Email>
-          </TextAndEmail>
         </LinksSection>
         <LinksSection>
           <TextAndEmail>
-              CONTACT
-              <Email href="mailto:contact@katiouchkafilms.com">
-                contact@katiouchkafilms.com
-              </Email>
-            </TextAndEmail>
+            ASSOCIATE/EXECUTIVE PRODUCER
+            <Email href="mailto:quentin@katiouchkafilms.com">
+            quentin@katiouchkafilms.com
+            </Email>
+          </TextAndEmail>
         </LinksSection>
         <LinksSection>
           <TextAndEmail>
@@ -134,7 +128,7 @@ const BottomWrapper = styled.div`
 `
 
 const LinksSection = styled.div`
-  width: 500px;
+  width: 400px;
   display: flex;
     flex-direction: column;
     gap: 30px;

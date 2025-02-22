@@ -36,7 +36,7 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ video, margin }) => {
         className={!isTransitioning ? "visible" : "hidden"}
         style={margin ? { marginTop: `${margin}px` } : {}}
       >
-        <source src={activeVideo} type="video/webm" />
+        <source src={activeVideo} type="video/mp4" />
       </VideoBackground>
 
       {nextVideo && (
@@ -46,7 +46,7 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ video, margin }) => {
           className="fading-in" 
           onLoadedData={handleTransitionEnd}
         >
-          <source src={nextVideo} type="video/webm" />
+          <source src={nextVideo} type="video/mp4" />
         </VideoBackground>
       )}
     </VideoContainer>

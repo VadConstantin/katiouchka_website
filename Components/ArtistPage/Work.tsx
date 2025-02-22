@@ -1,7 +1,7 @@
 "use client"
 
 import TalentsNavigation from '@/Components/Nav/TalentsNavigation';
-import { IArtist, INavigation } from '@/types/contentful';
+import { IArtist, INavigation } from '@/Types/contentful';
 import { Entry } from 'contentful';
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';

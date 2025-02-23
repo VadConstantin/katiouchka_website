@@ -86,30 +86,31 @@ const Logo = styled.img`
   }
 `
 
-const NavLink = styled.a<{isActive: boolean}>`
+const NavLink = styled.a<{ isActive: boolean }>`
   color: black;
   font-size: 1.2rem;
   text-decoration: none;
   position: relative;
-  display: inline-block; 
-  padding-bottom: 2px; 
+  display: inline-block;
+  padding-bottom: 2px;
 
   &::after {
     content: "";
     position: absolute;
-    left: 0;
+    left: 2px;
+    right: 2px;
     bottom: 0;
-    width: 0%;
     height: 4px;
     background-color: black;
     transition: width 0.2s ease-in-out;
-    width: ${({ isActive }) => (isActive ? "100%" : "0%")};
+    width: ${({ isActive }) => (isActive ? "calc(100% - 4px)" : "0%")};
   }
 
   &:hover::after {
-    width: 100%;
+    width: calc(100% - 4px);
   }
-`
+`;
+
 
 const NavWrapper = styled.div`
   padding-bottom: 30px;

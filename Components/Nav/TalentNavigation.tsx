@@ -74,26 +74,23 @@ const NavLink = styled.a`
   font-size: 1.2rem;
   text-decoration: none;
   position: relative;
-  display: inline-block; 
-  padding-bottom: 2px; 
-
-  &:hover {
-    /* opacity: 0.7; */
-  }
+  display: inline-block;
+  padding-bottom: 2px;
 
   &::after {
     content: "";
     position: absolute;
-    left: 0;
+    left: 2px;
+    right: 2px;
     bottom: 0;
-    width: 0%;
     height: 4px;
     background-color: black;
     transition: width 0.2s ease-in-out;
+    width: 0;
   }
 
   &:hover::after {
-    width: 100%;
+    width: calc(100% - 4px);
   }
 `;
 

@@ -95,23 +95,20 @@ const NavLink = styled.a`
   display: inline-block; 
   padding-bottom: 2px; 
 
-  &:hover {
-    opacity: 0.7;
-  }
-
   &::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0%;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    width: 0;
     height: 4px;
     background-color: black;
     transition: width 0.2s ease-in-out;
   }
 
   &:hover::after {
-    width: 100%;
+    width: calc(100% - 4px);
   }
 `;
 

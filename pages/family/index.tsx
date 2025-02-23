@@ -37,7 +37,7 @@ const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
       <BottomWrapper>
         <LinksSection>
           <TextAndEmail>
-            FOUNDER/CREATIVE DIRECTOR
+            FOUNDER
             <Email href="mailto:camelia@katiouchkafilms.com">
               camelia@katiouchkafilms.com
             </Email>
@@ -45,7 +45,7 @@ const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
         </LinksSection>
         <LinksSection>
           <TextAndEmail>
-            ASSOCIATE/EXECUTIVE PRODUCER
+            PARTNER/EP
             <Email href="mailto:quentin@katiouchkafilms.com">
             quentin@katiouchkafilms.com
             </Email>

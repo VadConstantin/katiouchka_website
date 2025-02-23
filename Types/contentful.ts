@@ -9,6 +9,7 @@ export interface WorkFields {
   slug: string
   description?: string
   photoDisposition?: "portrait" | "landscape"
+  vimeoVideoId?: string
 }
 
 export interface IWork extends EntrySkeletonType<WorkFields> {}

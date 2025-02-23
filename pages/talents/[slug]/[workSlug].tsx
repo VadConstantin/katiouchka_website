@@ -18,6 +18,7 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
   const imagesUrls = workPageData.fields.medias.map((media: any) => media.fields.file.url) ?? [];
   const typeOfMedia = workPageData.fields.typeOfMedia
   const videoUrl = workPageData.fields.medias[0].fields.file?.url || ''
+  const vimeoID = workPageData.fields.vimeoVideoId || null
 
   return(
     <WorkPageWrapper>
@@ -31,21 +32,38 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
             {description}
           </Description>
         </Texts>
-        {typeOfMedia === 'photo(s)' 
-        ? <Images>
-          {imagesUrls.map((url, index) => {
-            return(
-              <Img src={url} key={index}/>
-            )
-          })}
-        </Images>
-        : <VideoPlayer key={videoUrl as any} autoPlay loop muted playsInline>
+
+        {typeOfMedia === 'photo(s)' &&
+          <Images>
+            {imagesUrls.map((url, index) => {
+              return(
+                <Img src={url} key={index}/>
+              )
+            })}
+          </Images>
+        }
+
+        {typeOfMedia === 'video(s)' && vimeoID && (
+          <IframeContainer>
+            <iframe
+              src={`https://player.vimeo.com/video/${vimeoID}?autoplay=1&loop=1&muted=1`}
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </IframeContainer>
+
+        )}
+        
+        {typeOfMedia === 'video(s)' && !vimeoID && 
+          <VideoPlayer key={videoUrl as any} autoPlay loop muted playsInline>
             <source src={videoUrl as any} type="video/mp4" />
           </VideoPlayer>
         }
+
       </ContentWrapper>
       <BottomWrapper>
-        <Name>{talentData.fields.name}</Name>
+        {/* <Name>{talentData.fields.name}</Name> */}
         <Links>
           <CustomLink href={'/talents/'+ talentSlug}>{"< BACK"}</CustomLink>
         </Links>
@@ -80,12 +98,13 @@ const WorkPageWrapper = styled.div`
 `
 
 const BottomWrapper = styled.div`
-  position: sticky;
-  bottom: 0;
+  /* position: sticky;
+  bottom: 0; */
   background: white;
   padding-bottom: 1rem;
   padding-top: 20px;
   z-index: 10000;
+  width: 100px;
 `;
 
 const Links = styled.div`
@@ -111,8 +130,9 @@ const CustomLink = styled.a`
   text-decoration: none;
   color: black;
   font-size: 1.2rem;
+  opacity: 0.3;
   &:hover {
-    opacity: 0.3;
+    opacity: 1;
   }
 `
 
@@ -126,17 +146,20 @@ const ContentWrapper = styled.div`
 `;
 
 const WorkTitle = styled.div`
-  font-size: 3rem;
-  line-height: 40px;
+  font-size: clamp(1.5rem, 4vw, 3rem); /* 📱💻 Dynamique entre 1.5rem et 3rem */
+  line-height: 1.2;
   padding-bottom: 20px;
+  max-width: 500px;
 `
 
 const Description = styled.div`
+  font-size: clamp(0.8rem, 2vw, 1.5rem); /* 📱💻 Dynamique entre 1rem et 1.5rem */
   text-align: justify;
+
 `
 
 const Texts = styled.div`
-  max-width: 500px;
+  
 `
 
 const Images = styled.div`
@@ -154,5 +177,20 @@ const VideoPlayer = styled.video`
   object-fit: cover;
   transition: opacity 0.3s ease-in-out;
   width: 100%;
-  /* height: 800px; */
 `
+
+
+const IframeContainer = styled.div`
+  width: 100%;
+  height: auto; /* ✅ Autorise l'iframe à ajuster sa hauteur automatiquement */
+  position: relative;
+  padding-top: 56.25%; /* ✅ Ratio 16:9 pour vidéo responsive */
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* ✅ Remplit son conteneur sans hériter des règles internes */
+  }
+`;

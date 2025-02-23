@@ -1,9 +1,7 @@
 "use client"
 
-import styles from './IntroScreen.module.scss'
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { Asset } from 'contentful';
 
 interface IntroScreenProps {
   onFinish: () => void;

@@ -91,7 +91,7 @@ const CarouselContainer = styled.div<{ photoDisposition: string }>`
   width: ${({ photoDisposition }) =>
     photoDisposition === "portrait" ? "clamp(180px, 40vw, 500px)" : "clamp(280px, 100%, 1000px)"};
   height: ${({ photoDisposition }) =>
-    photoDisposition === "portrait" ? "clamp(320px, 42vw, 1000px)" : "clamp(180px, 42vw, 500px)"};
+    photoDisposition === "portrait" ? "clamp(320px, 42vw, 1000px)" : "clamp(220px, 42vw, 500px)"};
   overflow: hidden;
   display: flex;
   align-items: center;

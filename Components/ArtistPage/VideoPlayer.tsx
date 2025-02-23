@@ -17,7 +17,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug }
     <VideoContainer>
       <CustomLink key={videoUrl} href={`/talents/${talentSlug}/${workSlug}`} disabled={disableLink}>
         <VideoPlay key={videoUrl} autoPlay loop muted playsInline>
-          <source src={videoUrl} type="video/webm" />
+          <source src={videoUrl} type="video/mp4" />
         </VideoPlay>
       </CustomLink>
     </VideoContainer>
@@ -36,7 +36,7 @@ const VideoPlay = styled.video`
 const VideoContainer = styled.div`
   position: relative;
   width: clamp(280px, 100%, 1000px);
-  height: clamp(180px, 42vw, 500px);
+  height: clamp(220px, 42vw, 500px);
   overflow: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -45,7 +45,6 @@ const VideoContainer = styled.div`
 
 const CustomLink = styled.a<{disabled: boolean}>`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-  pointer-events: none;
   text-decoration: none;
   position: relative;
   display: block;

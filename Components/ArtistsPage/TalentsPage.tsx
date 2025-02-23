@@ -69,6 +69,8 @@ const Talent = styled.a`
 
   &:hover {
     opacity: 1;
+    mix-blend-mode: difference;
+    filter: invert(1) grayscale(100%) contrast(10%);
   }
 
   @media (max-width: 700px) {

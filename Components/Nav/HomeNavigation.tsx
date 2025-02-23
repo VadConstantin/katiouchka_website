@@ -80,6 +80,10 @@ const Logo = styled.img`
   @media (max-width: 450px) {
     width: 100%;
   }
+
+  &:hover {
+    opacity: 50%;
+  }
 `
 
 

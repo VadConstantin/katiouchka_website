@@ -1,19 +1,20 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { useEffect, useState, useRef } from "react";
+import styled from "styled-components";
 
 interface BackgroundVideoProps {
   video: any;
-  margin?: number
+  margin?: number;
 }
 
 const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ video, margin }) => {
-  const videoUrl = video?.fields?.file?.url || '';
+  const videoUrl = video?.fields?.file?.url || "";
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [activeVideo, setActiveVideo] = useState(videoUrl); 
-  const [nextVideo, setNextVideo] = useState<string | null>(null); 
-  const [isTransitioning, setIsTransitioning] = useState(false); 
+  const [activeVideo, setActiveVideo] = useState(videoUrl);
+  const [nextVideo, setNextVideo] = useState<string | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (videoUrl && videoUrl !== activeVideo) {
@@ -28,11 +29,32 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ video, margin }) => {
     setIsTransitioning(false);
   };
 
+  // ✅ Tentative de lecture automatique sur iOS
+  useEffect(() => {
+    const tryPlay = () => {
+      if (videoRef.current) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.log("Autoplay bloqué sur iOS", error);
+          });
+        }
+      }
+    };
+
+    tryPlay();
+  }, []);
+
   return (
-    <VideoContainer >
-      <VideoBackground 
-        key={activeVideo} 
-        autoPlay loop muted playsInline 
+    <VideoContainer>
+      <VideoBackground
+        ref={videoRef}
+        key={activeVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
         className={!isTransitioning ? "visible" : "hidden"}
         style={margin ? { marginTop: `${margin}px` } : {}}
       >
@@ -40,10 +62,14 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ video, margin }) => {
       </VideoBackground>
 
       {nextVideo && (
-        <VideoBackground 
-          key={nextVideo} 
-          autoPlay loop muted playsInline 
-          className="fading-in" 
+        <VideoBackground
+          key={nextVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="fading-in"
           onLoadedData={handleTransitionEnd}
         >
           <source src={nextVideo} type="video/mp4" />
@@ -71,7 +97,6 @@ const VideoBackground = styled.video`
   height: 100%;
   object-fit: cover;
   transition: opacity 0.8s ease-in-out;
-  
 
   &.visible {
     opacity: 1;
@@ -87,8 +112,11 @@ const VideoBackground = styled.video`
   }
 
   @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `;
-

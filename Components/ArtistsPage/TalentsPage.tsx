@@ -83,9 +83,9 @@ const TalentsWrapper = styled.div`
   display: flex;
     flex-direction: column;
     
-  @media (max-width: 700px) {
+  /* @media (max-width: 700px) {
     gap: 15px;
-  }
+  } */
 `
 
 const Type = styled.div`

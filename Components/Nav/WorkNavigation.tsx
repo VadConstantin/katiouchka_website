@@ -76,6 +76,7 @@ const Logo = styled.img`
   &:hover {
     mix-blend-mode: normal; 
     filter: none; 
+    opacity: 50%;
   }
 
   @media (max-width: 550px) {

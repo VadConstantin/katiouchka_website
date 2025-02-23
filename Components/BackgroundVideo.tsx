@@ -9,6 +9,7 @@ interface BackgroundVideoProps {
 }
 
 const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ video, margin }) => {
+
   const videoUrl = video?.fields?.file?.url || "";
   const videoRef = useRef<HTMLVideoElement>(null);
 

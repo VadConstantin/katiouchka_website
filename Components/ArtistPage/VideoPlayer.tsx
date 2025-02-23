@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 interface VideoPlayerProps {
@@ -11,12 +11,37 @@ interface VideoPlayerProps {
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug }) => {
   const videoUrl = video[0]?.fields?.file?.url ?? "";
-  const disableLink = talentSlug === ""
+  const disableLink = talentSlug === "";
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // ✅ Forcer l'autoplay même sur iOS
+  useEffect(() => {
+    const tryPlay = () => {
+      if (videoRef.current) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.log("Autoplay bloqué sur iOS", error);
+          });
+        }
+      }
+    };
+
+    tryPlay();
+  }, []);
 
   return (
     <VideoContainer>
       <CustomLink key={videoUrl} href={`/talents/${talentSlug}/${workSlug}`} disabled={disableLink}>
-        <VideoPlay key={videoUrl} autoPlay loop muted playsInline>
+        <VideoPlay
+          ref={videoRef}
+          key={videoUrl}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        >
           <source src={videoUrl} type="video/mp4" />
         </VideoPlay>
       </CustomLink>
@@ -25,6 +50,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug }
 };
 
 export default VideoPlayer;
+
+// ✅ STYLED COMPONENTS
 
 const VideoPlay = styled.video`
   width: 150%;
@@ -42,8 +69,7 @@ const VideoContainer = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 
-
-const CustomLink = styled.a<{disabled: boolean}>`
+const CustomLink = styled.a<{ disabled: boolean }>`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
   text-decoration: none;
   position: relative;

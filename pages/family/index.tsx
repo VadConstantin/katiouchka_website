@@ -45,7 +45,7 @@ const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
         </LinksSection>
         <LinksSection>
           <TextAndEmail>
-            PARTNER/EP
+            CO-FOUNDER
             <Email href="mailto:quentin@katiouchkafilms.com">
             quentin@katiouchkafilms.com
             </Email>

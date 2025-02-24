@@ -38,28 +38,25 @@ const Home = ({ locale, navMainData, homePageData }: HomeProps) => {
     return <BlackScreen />
   }
 
-  // return (
-  //   <div>
-  //     {showIntro ? (
-  //       <IntroScreen2 onFinish={handleFinishIntro} introVideo={homePageData.fields.introVideo} length={homePageData.fields.videoIntroLength as any}/>
-  //     ) : (
-  //       <>
-  //         {hasSeenIntro && <BlackOverlay />}
-  //         <HomePage 
-  //           navMainData={navMainData} 
-  //           locale={locale} 
-  //           onLocaleChange={() => {}} 
-  //           homePageData={homePageData} 
-  //           hasSeenIntro={hasSeenIntro}
-  //         />
-  //       </>
-  //     )}
-  //   </div>
-  // );
+  return (
+    <div>
+      {showIntro ? (
+        <IntroScreen2 onFinish={handleFinishIntro} introVideo={homePageData.fields.introVideo} length={homePageData.fields.videoIntroLength as any}/>
+      ) : (
+        <>
+          {hasSeenIntro && <BlackOverlay />}
+          <HomePage 
+            navMainData={navMainData} 
+            locale={locale} 
+            onLocaleChange={() => {}} 
+            homePageData={homePageData} 
+            hasSeenIntro={hasSeenIntro}
+          />
+        </>
+      )}
+    </div>
+  );
 
-  return(
-    <IntroScreen2 onFinish={handleFinishIntro} introVideo={homePageData.fields.introVideo} length={homePageData.fields.videoIntroLength as any}/>
-  )
 
 };
 

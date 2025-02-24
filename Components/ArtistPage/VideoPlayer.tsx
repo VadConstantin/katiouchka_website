@@ -61,13 +61,12 @@ const CustomLink = styled.a<{ disabled: boolean }>`
 const VideoContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1000px; /* ✅ Taille max sur grand écran */
-  aspect-ratio: 16 / 9; /* ✅ Maintient le ratio sans hack de padding */
+  max-width: 1000px;
+  aspect-ratio: 16 / 9; 
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 
   @media (max-width: 600px) {
     max-width: 100%;
@@ -81,8 +80,8 @@ const VideoContainer = styled.div`
 const VideoPlay = styled.video`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ✅ Remplit l'espace sans déformation */
-  object-position: center; /* ✅ Centre la vidéo */
+  object-fit: cover;
+  object-position: center;
   transition: opacity 0.3s ease-in-out;
 `;
 

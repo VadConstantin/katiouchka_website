@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import styled from "styled-components";
 import { Entry } from 'contentful';
-import { getWorkPageData, getNavigationData, getAllWorks } from '@/Services/get_contentful_data';
-import { IWorkPage, IWork } from "@/Types/contentful";
+import { getWorkPageData, getNavigationData, getAllWorks, getTalentsData } from '@/Services/get_contentful_data';
+import { IWorkPage, IWork, IArtist, ArtistFields } from "@/Types/contentful";
 import WorkNavigation from '@/Components/Nav/WorkNavigation';
 import Work from '@/Components/Work/Work';
 
@@ -11,13 +11,31 @@ interface IndexProps {
   navMainData: any;
   workPageData: Entry<IWorkPage>;
   allWorks: Entry<IWork>[]
+  allTalents: Entry<IArtist>[]
 }
 
-const Index:React.FC<IndexProps> = ({ navMainData, workPageData, allWorks }) => {
+const Index:React.FC<IndexProps> = ({ navMainData, workPageData, allWorks, allTalents }) => {
   const typeOfSelection = workPageData.fields.selection ?? "automatic"
-  const last10works = allWorks.slice(-10)
-  const manualWorks: any = workPageData.fields.works
 
+  const manualWorks: any = workPageData.fields.works
+  const manualWorksNames = manualWorks.map((work:any) => work?.fields?.name).filter(Boolean);
+
+  const allWorksWithTalentInfo = allTalents.flatMap((talent) => {
+    const artistFields = talent.fields as unknown as ArtistFields;
+  
+    return artistFields.works.map((work) => ({
+      work,
+      talentSlug: artistFields.slug,
+      talentName: artistFields.name,
+    }));
+  });
+
+  const manualFinalSelection = allWorksWithTalentInfo
+    .filter((element) => manualWorksNames.includes(element.work.fields?.name))
+    .sort((a, b) => 
+      manualWorksNames.indexOf(a.work.fields.name) - manualWorksNames.indexOf(b.work.fields?.name)
+  )
+  
   return(
     <Wrapper>
       <WorkNavigation navMainData={navMainData}/>
@@ -25,18 +43,24 @@ const Index:React.FC<IndexProps> = ({ navMainData, workPageData, allWorks }) => 
         <TabContent>
         {typeOfSelection === 'automatic' ?
           <Works>
-            {last10works.map((work, index) => {
-              return( 
-                <Work work={work as any} key={index}/> 
-              )
-            })}
+            {allWorksWithTalentInfo.slice(-16).map((item, index) => (
+              <Work
+                key={index}
+                work={item.work}
+                talentSlug={item.talentSlug}
+  
+              />
+            ))}
           </Works>
         : <Works>
-            {manualWorks.map((work: any, index: number) => {
-              return( 
-                <Work work={work as any} key={index}/> 
-              )
-            })}
+            {manualFinalSelection.map((item, index) => (
+              <Work
+                key={index}
+                work={item.work}
+                talentSlug={item.talentSlug}
+
+              />
+            ))}
           </Works>}
         </TabContent>
       </ContentWrapper>
@@ -52,6 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const navMainData = await getNavigationData(locale as string)
   const workPageData = await getWorkPageData()
   const allWorks = await getAllWorks()
+  const allTalents = await getTalentsData()
 
   if (!navMainData) {
     return {
@@ -67,16 +92,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       locale,
       navMainData,
       workPageData,
-      allWorks
+      allWorks,
+      allTalents
     },
   };
 }
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   padding: 5px;
   position: relative;
 `
@@ -88,13 +114,14 @@ const ContentWrapper = styled.div`
 
 const Works = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr); /* ✅ Deux colonnes */
+  gap: 5px;
   width: 100%;
   justify-content: center;
+  padding-top: 50px;
 
   @media (max-width: 850px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* ✅ Une colonne sur petit écran */
   }
 `;
 

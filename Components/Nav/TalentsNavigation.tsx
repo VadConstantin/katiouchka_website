@@ -53,7 +53,7 @@ const NavLinks = styled.div`
   bottom: 5px;
   left: 0%;
   right: 0;
-  z-index: 200;
+  
 
   @media (max-width: 550px) {
     width: 100%;
@@ -100,6 +100,13 @@ const NavLink = styled.a<{ isActive: boolean }>`
   position: relative;
   display: inline-block;
   padding-bottom: 2px;
+  z-index: 200;
+
+
+  &:hover {
+    mix-blend-mode: difference !important;
+    filter: invert(1) grayscale(100%) contrast(10%);
+  }
 
   &::after {
     content: "";
@@ -116,6 +123,8 @@ const NavLink = styled.a<{ isActive: boolean }>`
   &:hover::after {
     width: calc(100% - 4px);
   }
+
+
 `;
 
 const NavWrapper = styled.div`

@@ -13,12 +13,14 @@ interface WorkPageDataProps {
 
 const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talentData }) => {
   const description = workPageData.fields.description ?? ''
-  const talentSlug = talentData.fields.slug
-  const workTitle = workPageData.fields.name
+  const talentSlug = talentData.fields.slug || null
+  const workTitle = workPageData.fields.name || null
   const imagesUrls = workPageData.fields.medias.map((media: any) => media.fields.file.url) ?? [];
-  const typeOfMedia = workPageData.fields.typeOfMedia
+  const typeOfMedia = workPageData.fields.typeOfMedia || null
   const videos = workPageData.fields.medias || []
   const vimeoID = workPageData.fields.vimeoVideoId || null
+
+  
 
   return(
     <WorkPageWrapper>
@@ -75,11 +77,23 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
 export default WorkPage
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+
   const {slug, workSlug} = context.query
+  console.log('slug----->', slug)
+  console.log('work slug -=======>', workSlug)
   const locale = context.query.locale || 'fr';
   const navMainData = await getNavigationData(locale as string)
   const workPageData = await getTalentWorkData(workSlug as string)
   const talentData = await getTalentData(slug as string)
+
+
+
+  if (!workPageData || !workPageData.fields) {
+    console.error("workPageData is invalid:", workPageData);
+    return {
+      notFound: true, // Redirige vers une page 404 si le work n'existe pas
+    };
+  }
 
   return {
     props: {
@@ -89,6 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   }
 }
+
 
 const WorkPageWrapper = styled.div`
   display: flex;

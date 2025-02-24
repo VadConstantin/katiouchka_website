@@ -151,14 +151,14 @@ const ContentWrapper = styled.div`
 `;
 
 const WorkTitle = styled.div`
-  font-size: clamp(1.5rem, 4vw, 3rem); /* 📱💻 Dynamique entre 1.5rem et 3rem */
+  font-size: clamp(1.5rem, 4vw, 3rem);
   line-height: 1.2;
   padding-bottom: 20px;
   max-width: 500px;
 `
 
 const Description = styled.div`
-  font-size: clamp(0.8rem, 2vw, 1.5rem); /* 📱💻 Dynamique entre 1rem et 1.5rem */
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
   text-align: justify;
   max-width: 600px;
 `
@@ -175,8 +175,20 @@ const Images = styled.div`
 `
 
 const Img = styled.img`
-  max-width: 100%;
-`
+  flex: 0 1 calc(50% - 5px);
+  max-width: calc(50% - 5px);
+  box-sizing: border-box;
+  opacity: 1;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover; 
+
+  @media (max-width: 600px) {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+`;
+
 
 const VideoPlayer = styled.video`
   object-fit: cover;
@@ -187,15 +199,15 @@ const VideoPlayer = styled.video`
 
 const IframeContainer = styled.div`
   width: 100%;
-  height: auto; /* ✅ Autorise l'iframe à ajuster sa hauteur automatiquement */
+  height: auto; 
   position: relative;
-  padding-top: 56.25%; /* ✅ Ratio 16:9 pour vidéo responsive */
+  padding-top: 56.25%;
 
   iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* ✅ Remplit son conteneur sans hériter des règles internes */
+    height: 100%;
   }
 `;

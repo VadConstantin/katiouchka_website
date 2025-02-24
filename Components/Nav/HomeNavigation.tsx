@@ -84,7 +84,6 @@ const Logo = styled.img`
   }
 `
 
-
 const NavLink = styled.a`
   color: black;
   font-size: 1.2rem;
@@ -92,6 +91,8 @@ const NavLink = styled.a`
   position: relative;
   display: inline-block; 
   padding-bottom: 2px; 
+
+
 
   &::after {
     content: "";

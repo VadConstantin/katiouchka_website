@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
 import { useRouter } from "next/router";
+import { useState } from 'react';
 
 interface NavigationProps {
   navMainData: Entry<INavigation>
@@ -12,6 +13,7 @@ interface NavigationProps {
 }
 
 const WorkNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLogoNegative }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const logoUrl = (navMainData?.fields?.logo as any)?.fields?.file?.url;
   const links = (navMainData.fields.navLinks as any)
 
@@ -19,25 +21,30 @@ const WorkNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLogo
   const currentPath = router.asPath;
 
   return(
-    <NavWrapper>
-      <a href="/">
-        { isLogoNegative ? <LogoNegative src={logoUrl} alt="logo" /> : <Logo src={logoUrl} alt="logo" /> }
-      </a>
-      <NavLinks>
-        {links.map((link: any, i: number) => {
-          const isActive = currentPath === link.fields.link;
-          return (
-            <NavLink href={link.fields.link} key={link.sys.id} isActive={isActive}> 
-              {link.fields.name}
-            </NavLink>
-          )
-        })}
-      </NavLinks>
-      {credits && 
-        <Credits>
-          ©2025 KATIOUCHKAFILMS
-        </Credits>}
-    </NavWrapper>
+    <>
+      <NavWrapper>
+        <a href="/">
+          { isLogoNegative ? 
+          <LogoNegative src={logoUrl} alt="logo" />
+           : <Logo src={logoUrl} alt="logo"   onLoad={() => setIsImageLoaded(true)}
+           data-loaded={isImageLoaded}/> }
+        </a>
+        <NavLinks>
+          {links.map((link: any, i: number) => {
+            const isActive = currentPath === link.fields.link;
+            return (
+              <NavLink href={link.fields.link} key={link.sys.id} isActive={isActive}> 
+                {link.fields.name}
+              </NavLink>
+            )
+          })}
+        </NavLinks>
+        {credits && 
+          <Credits>
+            ©2025 KATIOUCHKAFILMS
+          </Credits>}
+      </NavWrapper>
+    </>
   )
 }
 
@@ -73,6 +80,7 @@ const LogoNegative = styled.img`
 
 const Logo = styled.img`
   width: 300px;
+  opacity: 1;
   &:hover {
     mix-blend-mode: normal; 
     filter: none; 

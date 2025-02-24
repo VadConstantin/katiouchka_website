@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { INavigation } from "../../Types/contentful";
 import { Entry } from 'contentful';
 
-
 interface NavigationProps {
   navMainData: Entry<INavigation>
   locale: string;
@@ -74,8 +73,7 @@ const NavLinks = styled.div`
 
 const Logo = styled.img`
   width: 300px;
-  /* mix-blend-mode: difference;
-  filter: invert(1) grayscale(100%) contrast(10%); */
+  opacity: 1;
 
   @media (max-width: 450px) {
     width: 100%;

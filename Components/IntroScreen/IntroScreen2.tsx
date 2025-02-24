@@ -75,7 +75,6 @@ const fadeToBlack = keyframes`
   100% { opacity: 1; }
 `;
 
-// ✅ Styles principaux
 const IntroContainer = styled.div`
   position: fixed;
   top: 0;

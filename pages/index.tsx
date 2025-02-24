@@ -57,7 +57,6 @@ const Home = ({ locale, navMainData, homePageData }: HomeProps) => {
     </div>
   );
 
-
 };
 
 export default Home;

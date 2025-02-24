@@ -14,24 +14,26 @@ const TalentNavigation:React.FC<TalentNavigationProps> = ({ navMainData, credits
   const links = (navMainData.fields.navLinks as any)
 
   return(
-    <NavWrapper>
-      <a href="/">
-        <Logo src={logoUrl} alt="logo" /> 
-      </a>
-      <NavLinks>
-        {links.map((link: any, i: number) => {
-          return (
-            <NavLink href={link.fields.link} key={link.sys.id}> 
-              {link.fields.name}
-            </NavLink>
-          )
-        })}
-      </NavLinks>
-      {credits && 
-        <Credits>
-          ©2025 KATIOUCHKAFILMS
-        </Credits>}
-    </NavWrapper>
+    <>
+      <NavWrapper>
+        <a href="/">
+          <Logo src={logoUrl} alt="logo" /> 
+        </a>
+        <NavLinks>
+          {links.map((link: any, i: number) => {
+            return (
+              <NavLink href={link.fields.link} key={link.sys.id}> 
+                {link.fields.name}
+              </NavLink>
+            )
+          })}
+        </NavLinks>
+        {credits && 
+          <Credits>
+            ©2025 KATIOUCHKAFILMS
+          </Credits>}
+      </NavWrapper>
+    </>
   )
 }
 
@@ -55,6 +57,7 @@ const NavLinks = styled.div`
 
 const Logo = styled.img`
   width: 300px;
+  opacity: 1;
   &:hover {
     mix-blend-mode: normal; 
     filter: none; 

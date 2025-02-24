@@ -19,25 +19,27 @@ const FamilyNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLo
   const currentPath = router.asPath;
 
   return(
-    <NavWrapper>
-      <a href="/">
-        { isLogoNegative ? <LogoNegative src={logoUrl} alt="logo" /> : <Logo src={logoUrl} alt="logo" /> }
-      </a>
-      <NavLinks>
-        {links.map((link: any, i: number) => {
-          const isActive = currentPath === link.fields.link;
-          return (
-            <NavLink href={link.fields.link} key={link.sys.id} isActive={isActive}> 
-              {link.fields.name}
-            </NavLink>
-          )
-        })}
-      </NavLinks>
-      {credits && 
-        <Credits>
-          ©2025 KATIOUCHKAFILMS
-        </Credits>}
-    </NavWrapper>
+    <>
+      <NavWrapper>
+        <a href="/">
+          { isLogoNegative ? <LogoNegative src={logoUrl} alt="logo" /> : <Logo src={logoUrl} alt="logo" /> }
+        </a>
+        <NavLinks>
+          {links.map((link: any, i: number) => {
+            const isActive = currentPath === link.fields.link;
+            return (
+              <NavLink href={link.fields.link} key={link.sys.id} isActive={isActive}> 
+                {link.fields.name}
+              </NavLink>
+            )
+          })}
+        </NavLinks>
+        {credits && 
+          <Credits>
+            ©2025 KATIOUCHKAFILMS
+          </Credits>}
+      </NavWrapper>
+    </>
   )
 }
 
@@ -73,6 +75,7 @@ const LogoNegative = styled.img`
 `
 
 const Logo = styled.img`
+  opacity: 1;
   width: 300px;
   &:hover {
     mix-blend-mode: normal; 

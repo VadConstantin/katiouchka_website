@@ -17,7 +17,7 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
   const workTitle = workPageData.fields.name
   const imagesUrls = workPageData.fields.medias.map((media: any) => media.fields.file.url) ?? [];
   const typeOfMedia = workPageData.fields.typeOfMedia
-  const videoUrl = workPageData.fields.medias[0].fields.file?.url || ''
+  const videos = workPageData.fields.medias || []
   const vimeoID = workPageData.fields.vimeoVideoId || null
 
   return(
@@ -52,13 +52,18 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
               allowFullScreen
             ></iframe>
           </IframeContainer>
-
         )}
         
         {typeOfMedia === 'video(s)' && !vimeoID && 
-          <VideoPlayer key={videoUrl as any} autoPlay loop muted playsInline>
-            <source src={videoUrl as any} type="video/mp4" />
-          </VideoPlayer>
+          <> 
+            {videos.map((video, index) => {
+              return(
+                <VideoPlayer key={video.fields.file?.url as any} autoPlay loop muted playsInline>
+                  <source src={video.fields.file?.url as any} type="video/mp4" />
+                </VideoPlayer>
+              )
+            })}
+          </>
         }
 
       </ContentWrapper>

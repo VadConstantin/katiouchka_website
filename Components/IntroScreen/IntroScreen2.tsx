@@ -14,7 +14,6 @@ const IntroScreen2: React.FC<IntroScreenProps> = ({ onFinish, introVideo, length
   const lengthNumber = Number(length);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // ✅ Gestion du timeout pour fermer l'intro
   useEffect(() => {
     const timeout = setTimeout(() => {
       onFinish();
@@ -23,7 +22,6 @@ const IntroScreen2: React.FC<IntroScreenProps> = ({ onFinish, introVideo, length
     return () => clearTimeout(timeout);
   }, []);
 
-  // ✅ Force autoplay sur iOS
   useEffect(() => {
     const tryPlay = () => {
       if (videoRef.current) {
@@ -60,7 +58,6 @@ const IntroScreen2: React.FC<IntroScreenProps> = ({ onFinish, introVideo, length
 
 export default IntroScreen2;
 
-// ✅ Animations CSS
 const zoomIn = keyframes`
   0% {
     transform: translateX(-50%) scale(1);
@@ -110,22 +107,3 @@ const VideoPlayer = styled.video`
   transition: opacity 0.3s ease-in-out;
 `;
 
-const ZoomLogo = styled.img`
-  width: 98%;
-  height: auto;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  transform-origin: center;
-  animation: ${zoomIn} 2s cubic-bezier(1, 0, 1, 0) 1s forwards;
-`;
-
-const BlackOverlay = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: black;
-  opacity: 0;
-  animation: ${fadeToBlack} 2s ease-in 2.5s forwards;
-`;

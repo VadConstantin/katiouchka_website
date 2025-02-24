@@ -92,8 +92,6 @@ const NavLink = styled.a`
   display: inline-block; 
   padding-bottom: 2px; 
 
-
-
   &::after {
     content: "";
     position: absolute;
@@ -110,7 +108,6 @@ const NavLink = styled.a`
     width: calc(100% - 4px);
   }
 `;
-
 
 const Credits = styled.div`
   font-family: 'Typnic Headline', sans-serif;

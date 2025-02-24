@@ -3,7 +3,6 @@ import HomePage from '@/Components/HomePage/HomePage';
 import { getHomePageData, getNavigationData } from '@/Services/get_contentful_data';
 import { IHomePage } from "../Types/contentful";
 import { Entry } from 'contentful';
-import IntroScreen from '@/Components/IntroScreen/IntroScreen';
 import { useState, useEffect } from 'react';
 import styled, { keyframes } from "styled-components";
 import IntroScreen2 from '@/Components/IntroScreen/IntroScreen2';

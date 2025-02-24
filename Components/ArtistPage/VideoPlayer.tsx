@@ -14,7 +14,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug }
   const disableLink = talentSlug === "";
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // ✅ Forcer l'autoplay même sur iOS
   useEffect(() => {
     const tryPlay = () => {
       if (videoRef.current) {
@@ -51,23 +50,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug }
 
 export default VideoPlayer;
 
-// ✅ STYLED COMPONENTS
-
-const VideoPlay = styled.video`
-  width: 150%;
-  height: 150%;
-  object-fit: cover;
-  transition: opacity 0.3s ease-in-out;
-`;
-
-const VideoContainer = styled.div`
-  position: relative;
-  width: clamp(280px, 100%, 1000px);
-  height: clamp(220px, 42vw, 500px);
-  overflow: hidden;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-`;
 
 const CustomLink = styled.a<{ disabled: boolean }>`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
@@ -75,3 +57,35 @@ const CustomLink = styled.a<{ disabled: boolean }>`
   position: relative;
   display: block;
 `;
+
+const VideoContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1000px; /* ✅ Taille max sur grand écran */
+  aspect-ratio: 16 / 9; /* ✅ Maintient le ratio sans hack de padding */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+  }
+
+  @media (max-width: 400px) {
+    max-width: 100%;
+  }
+`;
+
+const VideoPlay = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ Remplit l'espace sans déformation */
+  object-position: center; /* ✅ Centre la vidéo */
+  transition: opacity 0.3s ease-in-out;
+`;
+
+
+
+

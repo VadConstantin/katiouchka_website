@@ -32,7 +32,6 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
             {description}
           </Description>
         </Texts>
-
         {typeOfMedia === 'photo(s)' &&
           <Images>
             {imagesUrls.map((url, index) => {
@@ -42,7 +41,6 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
             })}
           </Images>
         }
-
         {typeOfMedia === 'video(s)' && vimeoID && (
           <IframeContainer>
             <iframe
@@ -53,9 +51,8 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
             ></iframe>
           </IframeContainer>
         )}
-        
         {typeOfMedia === 'video(s)' && !vimeoID && 
-          <> 
+          <VideosContainer> 
             {videos.map((video, index) => {
               return(
                 <VideoPlayer key={video.fields.file?.url as any} autoPlay loop muted playsInline>
@@ -63,12 +60,10 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
                 </VideoPlayer>
               )
             })}
-          </>
+          </VideosContainer>
         }
-
       </ContentWrapper>
       <BottomWrapper>
-        {/* <Name>{talentData.fields.name}</Name> */}
         <Links>
           <CustomLink href={'/talents/'+ talentSlug}>{"< BACK"}</CustomLink>
         </Links>
@@ -103,8 +98,6 @@ const WorkPageWrapper = styled.div`
 `
 
 const BottomWrapper = styled.div`
-  /* position: sticky;
-  bottom: 0; */
   background: white;
   padding-bottom: 1rem;
   padding-top: 20px;
@@ -164,7 +157,6 @@ const Description = styled.div`
 `
 
 const Texts = styled.div`
-  
 `
 
 const Images = styled.div`
@@ -209,5 +201,17 @@ const IframeContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+  }
+`;
+
+const VideosContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
   }
 `;

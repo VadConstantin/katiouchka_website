@@ -154,7 +154,7 @@ const WorkTitle = styled.div`
   font-size: clamp(1.5rem, 4vw, 3rem);
   line-height: 1.2;
   padding-bottom: 20px;
-  max-width: 500px;
+  max-width: 600px;
 `
 
 const Description = styled.div`

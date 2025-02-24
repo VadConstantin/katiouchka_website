@@ -79,19 +79,15 @@ export default WorkPage
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const {slug, workSlug} = context.query
-  console.log('slug----->', slug)
-  console.log('work slug -=======>', workSlug)
   const locale = context.query.locale || 'fr';
   const navMainData = await getNavigationData(locale as string)
   const workPageData = await getTalentWorkData(workSlug as string)
   const talentData = await getTalentData(slug as string)
 
-
-
   if (!workPageData || !workPageData.fields) {
     console.error("workPageData is invalid:", workPageData);
     return {
-      notFound: true, // Redirige vers une page 404 si le work n'existe pas
+      notFound: true,
     };
   }
 

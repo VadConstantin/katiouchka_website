@@ -114,14 +114,14 @@ const ContentWrapper = styled.div`
 
 const Works = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* ✅ Deux colonnes */
+  grid-template-columns: repeat(2, 1fr);
   gap: 5px;
   width: 100%;
   justify-content: center;
   padding-top: 50px;
 
   @media (max-width: 850px) {
-    grid-template-columns: 1fr; /* ✅ Une colonne sur petit écran */
+    grid-template-columns: 1fr;
   }
 `;
 

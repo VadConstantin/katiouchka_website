@@ -53,8 +53,6 @@ export const getTalentWorkData = async (slug: string):Promise<Entry<IWork>> => {
     limit: 1
   } as any)
 
-  console.log('entries ---->', entries)
-
   return entries.items[0]
 }
 

@@ -78,9 +78,8 @@ const LogoNegative = styled.img`
 const Logo = styled.img`
   width: 300px;
   &:hover {
-    mix-blend-mode: normal; 
-    filter: none; 
-    opacity: 50%;
+    mix-blend-mode: difference;
+    filter: invert(1) grayscale(100%) contrast(10%);
   }
 
   @media (max-width: 550px) {

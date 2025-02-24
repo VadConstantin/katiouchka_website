@@ -97,6 +97,11 @@ const VideoContainer = styled.div`
   overflow: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+
+  @media (max-width: 450px) {
+    top: -50px;
+  }
+  
 `;
 
 const VideoPlayer = styled.video`

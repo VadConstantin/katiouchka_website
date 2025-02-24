@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 `;
 
 const Talent = styled.a`
-  letter-spacing: -2px;
+  /* letter-spacing: -2px; */
   font-family: 'Diatype', sans-serif;
   opacity: 0.2;
   text-decoration: none;

@@ -113,4 +113,3 @@ const Credits = styled.div`
   left: 0;
   opacity: 0;
 `
-

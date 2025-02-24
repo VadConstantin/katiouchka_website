@@ -155,7 +155,7 @@ const WorkTitle = styled.div`
 const Description = styled.div`
   font-size: clamp(0.8rem, 2vw, 1.5rem); /* 📱💻 Dynamique entre 1rem et 1.5rem */
   text-align: justify;
-
+  max-width: 600px;
 `
 
 const Texts = styled.div`

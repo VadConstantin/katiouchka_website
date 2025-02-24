@@ -44,21 +44,6 @@ const FamilyNavigation:React.FC<NavigationProps> = ({ navMainData, credits, isLo
 export default FamilyNavigation;
 
 
-// const NavLinks = styled.div`
-//   display: flex;
-//     justify-content: space-between;
-//   position: absolute;
-//   bottom: 5px;
-//   left: 0%;
-//   right: 0;
-//   z-index: 200;
-
-//   @media (max-width: 550px) {
-//     width: 100%;
-//     justify-content: space-between;
-//   } 
-// `
-
 const NavLinks = styled.div`
   display: flex;
   justify-content: space-between;
@@ -128,7 +113,6 @@ const NavLink = styled.a<{ isActive: boolean }>`
 `;
 
 const NavWrapper = styled.div`
-  /* position: absolute; */
   padding-bottom: 30px;
   text-align: center;
   top: 5px;
@@ -146,6 +130,4 @@ const Credits = styled.div`
   bottom: 0;
   left: 0;
   opacity: 0;
-
-
 `

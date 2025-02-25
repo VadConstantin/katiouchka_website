@@ -14,9 +14,10 @@ const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
   const frenchText = familyPageData.fields.texteFr
   const englishText = familyPageData.fields.texteEn
   const italianText = familyPageData.fields.texteIt
+  const pageColor = familyPageData.fields.pageColor
 
   return(
-    <Wrapper>
+    <Wrapper pageColor={pageColor}>
       <FamilyNavigation navMainData={navMainData} credits />
       <ContentWrapper>
         <TextsWrapper>
@@ -111,11 +112,12 @@ const ContentWrapper = styled.div`
     max-height: initial;
 `
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{pageColor: string}>`
   padding: 5px;
   display: flex;
     flex-direction: column;
   min-height: 100vh;
+  background-color: ${({ pageColor }) => pageColor};
 `
 
 const BottomWrapper = styled.div`

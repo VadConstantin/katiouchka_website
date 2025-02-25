@@ -19,6 +19,7 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
   const typeOfMedia = workPageData.fields.typeOfMedia || null
   const videos = workPageData.fields.medias || []
   const vimeoID = workPageData.fields.vimeoVideoId || null
+  const talentName = talentData.fields.name
 
   
 
@@ -30,6 +31,9 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
           <WorkTitle>
             {workTitle}
           </WorkTitle>
+          <TalentName>
+            //{talentName}
+          </TalentName>
           <Description>
             {description}
           </Description>
@@ -127,12 +131,13 @@ const Links = styled.div`
   }
 `;
 
-const Name = styled.div`
+const TalentName = styled.div`
   font-family: 'Diatype', sans-serif;
-  font-size: clamp(3rem, 10vw, 6rem);
   text-transform: uppercase;
   line-height: 0.8;
   margin-left: 0px;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  padding-bottom: 10px;
 `;
 
 const CustomLink = styled.a`
@@ -155,14 +160,12 @@ const ContentWrapper = styled.div`
 `;
 
 const WorkTitle = styled.div`
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  line-height: 1.2;
-  padding-bottom: 20px;
-  max-width: 600px;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.8;
 `
 
 const Description = styled.div`
-  font-size: clamp(0.8rem, 2vw, 1.5rem);
+  font-size: clamp(0.5rem, 1vw, 1rem);
   text-align: justify;
   max-width: 600px;
 `
@@ -185,6 +188,7 @@ const Img = styled.img`
   height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover; 
+  border-radius: 10px;
 
   @media (max-width: 600px) {
     flex: 0 1 100%;
@@ -197,6 +201,7 @@ const VideoPlayer = styled.video`
   object-fit: cover;
   transition: opacity 0.3s ease-in-out;
   width: 100%;
+  border-radius: 10px;
 `
 
 

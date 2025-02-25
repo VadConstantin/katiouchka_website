@@ -67,6 +67,7 @@ const VideoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 
   @media (max-width: 600px) {
     max-width: 100%;
@@ -83,6 +84,7 @@ const VideoPlay = styled.video`
   object-fit: cover;
   object-position: center;
   transition: opacity 0.3s ease-in-out;
+  border-radius: 10px
 `;
 
 

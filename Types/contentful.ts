@@ -75,6 +75,7 @@ export interface FamilyPageFields {
   texteFr: string
   texteEn: string
   texteIt: string
+  pageColor: string
 }
 
 export interface IFamilyPage extends EntrySkeletonType<FamilyPageFields> {}

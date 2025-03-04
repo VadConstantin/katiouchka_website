@@ -43,12 +43,18 @@ const Index:React.FC<IndexProps> = ( {navMainData, familyPageData} ) => {
               camelia@katiouchkafilms.com
             </Email>
           </TextAndEmail>
-        </LinksSection>
-        <LinksSection>
           <TextAndEmail>
             CO-FOUNDER
             <Email href="mailto:quentin@katiouchkafilms.com">
-            quentin@katiouchkafilms.com
+              quentin@katiouchkafilms.com
+            </Email>
+          </TextAndEmail>
+        </LinksSection>
+        <LinksSection>
+          <TextAndEmail>
+            WEB DEVELOPER
+            <Email href="mailto:vad.constantin@gmail.com">
+              vad.constantin@gmail.com
             </Email>
           </TextAndEmail>
         </LinksSection>
@@ -123,7 +129,7 @@ const Wrapper = styled.div<{pageColor: string}>`
 const BottomWrapper = styled.div`
   display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 30px;
     justify-content: space-between;
   width: 100%;
   padding: 50px 0 10px 0;

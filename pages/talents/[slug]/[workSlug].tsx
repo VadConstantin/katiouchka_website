@@ -4,6 +4,8 @@ import { IArtist, INavigation, IWork } from '@/Types/contentful';
 import TalentNavigation from '@/Components/Nav/TalentNavigation';
 import { Entry } from 'contentful';
 import styled from 'styled-components';
+import { useRef, useState } from 'react'
+import SingleVideoPlayer from '@/Components/Work/SingleVideoPlayer';
 
 interface WorkPageDataProps {
   workPageData: IWork
@@ -21,7 +23,16 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
   const vimeoID = workPageData.fields.vimeoVideoId || null
   const talentName = talentData.fields.name
 
-  
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
 
   return(
     <WorkPageWrapper>
@@ -66,6 +77,13 @@ const WorkPage:React.FC<WorkPageDataProps> = ({ workPageData, navMainData, talen
                 </VideoPlayer>
               )
             })}
+          </VideosContainer>
+        }
+        {typeOfMedia === 'audio(s)' && 
+          <VideosContainer>
+            {videos.map((video, index) => (
+              <SingleVideoPlayer key={index} videoUrl={video.fields.file?.url as any} />
+            ))}
           </VideosContainer>
         }
       </ContentWrapper>

@@ -5,7 +5,7 @@ export interface WorkFields {
   name: string
   locale: string
   medias: Array<Asset>
-  typeOfMedia: "video(s)" | "photo(s)"
+  typeOfMedia: "video(s)" | "photo(s)" | "audio(s)"
   slug: string
   description?: string
   photoDisposition?: "portrait" | "landscape"

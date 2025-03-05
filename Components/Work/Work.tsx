@@ -33,6 +33,14 @@ const Work: React.FC<WorkProps> = ({ work, talentSlug, talentName }) => {
           talentSlug={talentSlug || ""}
         />
       )}
+      {work.fields.typeOfMedia === 'audio(s)' && (
+        <VideoPlayer
+          video={video}
+          audio
+          workSlug={work.fields.slug}
+          talentSlug={talentSlug || ""}
+        />
+      )}
       <WorkTitle>{workName}</WorkTitle>
     </WorkWrapper>
   );

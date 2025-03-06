@@ -54,9 +54,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ video, workSlug, talentSlug, 
           <source src={videoUrl} type="video/mp4" />
         </VideoPlay>
       </CustomLink>
-      {audio && <MuteButton onClick={toggleMute}>
-        {isMuted ? "PLAY SOUNDTRACK" : "MUTE"}
-      </MuteButton>}
+      {audio &&       
+        <MuteButton onClick={toggleMute}>
+          <span>{isMuted ? "PLAY SOUNDTRACK" : "MUTE SOUNDTRACK"}</span>
+        </MuteButton>}
     </VideoContainer>
   );
 };
@@ -100,20 +101,31 @@ const VideoPlay = styled.video`
   border-radius: 10px;
 `;
 
-const MuteButton = styled.button`
+
+const MuteButton = styled.div`
+  font-family: 'Diatype', sans-serif;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.7);
-  color: white;
+  width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  mix-blend-mode: difference !important;
+  span {
+    color: white !important; 
+  }
   border: none;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 30px;
   cursor: pointer;
   border-radius: 5px;
 
   &:hover {
-    background: rgba(0,0,0,0.9);
+    color: white !important;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 20px;
   }
 `;
 

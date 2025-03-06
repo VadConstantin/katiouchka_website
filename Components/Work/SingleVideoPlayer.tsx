@@ -22,7 +22,7 @@ const SingleVideoPlayer: React.FC<SingleVideoPlayerProps> = ({ videoUrl }) => {
         <source src={videoUrl} type="video/mp4" />
       </VideoPlayer>
       <MuteButton onClick={toggleMute}>
-        {isMuted ? "PLAY SOUNDTRACK" : "MUTE"}
+        <span>{isMuted ? "PLAY SOUNDTRACK" : "MUTE SOUNDTRACK"}</span>
       </MuteButton>
     </VideoWrapper>
   );
@@ -52,19 +52,55 @@ const VideoPlayer = styled.video`
   border-radius: 10px;
 `
 
-const MuteButton = styled.button`
+// const MuteButton = styled.button`
+//   position: absolute;
+//   bottom: 10px;
+//   right: 10px;
+//   background: rgba(0,0,0,0.7);
+//   span {
+//     color: white !important; // Le texte reste blanc
+//   }
+//   border: none;
+//   padding: 5px 10px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   border-radius: 5px;
+
+//   &:hover {
+//     background: rgba(0,0,0,0.9);
+//   }
+// `;
+
+
+const MuteButton = styled.div`
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.7);
-  color: white;
+  width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  mix-blend-mode: difference !important;
+  span {
+    color: white !important; 
+  }
   border: none;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 30px;
   cursor: pointer;
   border-radius: 5px;
 
   &:hover {
-    background: rgba(0,0,0,0.9);
+    color: white !important;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 20px;
   }
 `;
+
+
+
+
+
+
+

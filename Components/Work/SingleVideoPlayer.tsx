@@ -52,40 +52,19 @@ const VideoPlayer = styled.video`
   border-radius: 10px;
 `
 
-// const MuteButton = styled.button`
-//   position: absolute;
-//   bottom: 10px;
-//   right: 10px;
-//   background: rgba(0,0,0,0.7);
-//   span {
-//     color: white !important; // Le texte reste blanc
-//   }
-//   border: none;
-//   padding: 5px 10px;
-//   font-size: 16px;
-//   cursor: pointer;
-//   border-radius: 5px;
-
-//   &:hover {
-//     background: rgba(0,0,0,0.9);
-//   }
-// `;
-
-
 const MuteButton = styled.div`
   position: absolute;
   width: 500px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  bottom: 4px;
+  right: 5px;
+  text-align: end;
   mix-blend-mode: difference !important;
   span {
     color: white !important; 
   }
   border: none;
   padding: 5px 10px;
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer;
   border-radius: 5px;
 
@@ -94,13 +73,6 @@ const MuteButton = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 20px;
+    font-size: 15px;
   }
 `;
-
-
-
-
-
-
-

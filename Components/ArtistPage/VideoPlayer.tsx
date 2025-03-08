@@ -106,17 +106,16 @@ const MuteButton = styled.div`
   font-family: 'Diatype', sans-serif;
   position: absolute;
   width: 500px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  bottom: 4px;
+  right: 5px;
+  text-align: end;
   mix-blend-mode: difference !important;
   span {
     color: white !important; 
   }
   border: none;
   padding: 5px 10px;
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer;
   border-radius: 5px;
 
@@ -125,10 +124,6 @@ const MuteButton = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 20px;
+    font-size: 15px;
   }
 `;
-
-
-
-
